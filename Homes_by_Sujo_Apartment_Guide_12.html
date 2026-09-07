@@ -1,0 +1,3688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homes by Sujo — Apartment Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5E9D7;
+  --cream-soft:#FBF6EC;
+  --paper:#FEFCF9;
+  --brown:#4E342E;
+  --brown-deep:#3E2723;
+  --brown-mid:#6D4C41;
+  --tan:#8D6E63;
+  --line:#E4D5BE;
+  --line-soft:#EAD9BE;
+  --white:#FFFFFF;
+  --ink:#3E2723;
+  --ink-soft:#6D5B52;
+  --ink-faint:#9C8A7E;
+  /* text-accent gold (brown family, used for labels/borders) */
+  --gold:#4E342E;
+  --gold-lt:#8D6E63;
+  --gold-pale:#F5E9D7;
+  /* true warm-gold used for glow lines / decorative accents */
+  --gold-line:#C9A96E;
+  --gold-glow:#CC7838;
+  --good:#558B2F;
+  --good-bg:#F1F8E9;
+  --red:#C0392B;
+  --red-bg:#FDF2F0;
+  --focus:#C9A96E;
+  --shadow: 0 8px 48px rgba(62,39,35,0.14), 0 2px 12px rgba(62,39,35,0.08);
+  --shadow-sm: 0 2px 12px rgba(62,39,35,0.08);
+  --shadow-md: 0 8px 28px rgba(62,39,35,0.12);
+  --shadow-lg: 0 16px 48px rgba(62,39,35,0.20);
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:22px;
+  --font-serif:'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-sans:'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--font-sans);
+  text-transform:capitalize;
+  font-size:16px;
+  line-height:1.5;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+button, input, select, textarea, ::placeholder{
+  text-transform:capitalize;
+}
+img{max-width:100%;}
+a{color:inherit;}
+button{font-family:inherit;}
+h1,h2,h3,h4{font-family:var(--font-serif);font-weight:400;color:var(--brown-deep);margin:0;}
+p{margin:0;}
+ul{list-style:none;margin:0;padding:0;}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
+@keyframes fadeUp{ from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+@keyframes slideInRow{ from{opacity:0;transform:translateX(-16px);} to{opacity:1;transform:translateX(0);} }
+
+/* ---------- layout shell ---------- */
+.skip-link{position:absolute;left:-999px;top:0;background:var(--brown-deep);color:var(--cream);padding:10px 16px;border-radius:0 0 8px 0;z-index:200;}
+.skip-link:focus{left:0;}
+
+header.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(59,34,24,0.98);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  color:var(--cream);
+  border-bottom:1px solid rgba(245,233,215,0.15);
+}
+.topbar-inner{
+  max-width:1180px;margin:0 auto;padding:11px 24px;
+  display:flex;align-items:center;gap:18px;
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;text-decoration:none;cursor:pointer;background:none;border:none;padding:0;}
+.brand svg{width:30px;height:30px;flex-shrink:0;background:rgba(245,233,215,0.12);border-radius:8px;padding:4px;}
+.brand-text{font-family:var(--font-serif);font-size:1.15rem;color:var(--cream);white-space:nowrap;letter-spacing:.2px;}
+.brand-text em{font-style:italic;opacity:.65;font-family:var(--font-serif);font-size:.9em;}
+
+.global-search{
+  flex:1;display:flex;align-items:center;gap:10px;
+  background:rgba(245,233,215,0.08);
+  border:1px solid rgba(245,233,215,0.18);
+  border-radius:999px;padding:9px 16px;
+  transition:background .15s, border-color .15s;
+}
+.global-search:focus-within{background:rgba(245,233,215,0.16);border-color:rgba(201,169,110,0.6);}
+.global-search svg{width:17px;height:17px;opacity:.6;flex-shrink:0;}
+.global-search input{
+  background:none;border:none;color:var(--cream);font-size:0.94rem;flex:1;min-width:0;
+  font-family:var(--font-sans);
+}
+.global-search input::placeholder{color:rgba(245,233,215,0.5);}
+.global-search input:focus{outline:none;}
+.search-clear{
+  background:none;border:none;color:rgba(245,233,215,.75);cursor:pointer;padding:2px;line-height:0;flex-shrink:0;
+  border-radius:50%;
+}
+.search-clear:hover{color:var(--cream);}
+
+.topbar-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.icon-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;
+  border:none;
+  color:rgba(245,233,215,0.65);
+  padding:8px 14px;border-radius:999px;
+  cursor:pointer;font-size:0.78rem;font-weight:600;letter-spacing:.08em;text-transform:capitalize;
+  white-space:nowrap;
+  transition:all .2s;
+}
+.icon-btn:hover{background:rgba(245,233,215,0.12);color:var(--cream);}
+.icon-btn svg{width:15px;height:15px;flex-shrink:0;}
+.icon-btn .count-badge{
+  background:var(--gold-line);color:var(--brown-deep);
+  border-radius:999px;font-size:.7rem;font-weight:700;
+  min-width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;
+  letter-spacing:0;text-transform:none;
+}
+.icon-btn .count-badge[hidden]{display:none;}
+
+main{max-width:1180px;margin:0 auto;padding:0 20px 90px;}
+
+/* ---------- HOME HERO (dark, gold-accented) ---------- */
+.home-hero{
+  background:linear-gradient(160deg, #3E2220 0%, #5C3428 55%, #4A2C24 100%);
+  padding:40px 44px 44px;position:relative;overflow:hidden;
+  margin:28px 0 0;border-radius:26px 26px 0 0;
+  animation:fadeUp .6s cubic-bezier(.22,.68,0,1.2) both;
+}
+.home-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 30%, rgba(201,169,110,0.10) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px;position:relative;z-index:1;}
+.hero-logo-row{display:flex;align-items:center;gap:13px;}
+.hero-logo-box{
+  width:52px;height:52px;border-radius:13px;background:var(--cream);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 2px 12px rgba(0,0,0,0.2);
+}
+.hero-logo-box svg{width:38px;height:38px;color:var(--brown);}
+.hero-brand-text{font-family:var(--font-serif);font-size:1.3rem;color:var(--cream);letter-spacing:-.3px;line-height:1;}
+.hero-brand-text em{font-style:italic;color:rgba(245,233,215,0.65);}
+.hero-doc-tag{text-align:right;}
+.hero-doc-tag-pill{
+  display:inline-block;border:1px solid rgba(245,233,215,0.22);
+  color:rgba(245,233,215,0.72);font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:capitalize;
+  padding:6px 15px;border-radius:20px;background:rgba(245,233,215,0.06);margin-bottom:5px;
+}
+.hero-doc-tagline{display:block;font-size:.62rem;font-style:italic;color:rgba(245,233,215,0.4);letter-spacing:.03em;}
+.hero-gold-line{
+  height:1px;margin-bottom:28px;position:relative;z-index:1;
+  background:linear-gradient(90deg, rgba(201,169,110,0.55), rgba(201,169,110,0.15) 60%, transparent);
+}
+.hero-mid{display:flex;align-items:flex-start;gap:40px;position:relative;z-index:1;flex-wrap:wrap;}
+.hero-left{flex:1;min-width:260px;}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:10px;font-size:.62rem;font-weight:700;letter-spacing:.22em;
+  color:rgba(245,233,215,0.45);text-transform:capitalize;margin-bottom:14px;
+}
+.hero-eyebrow::before{content:'';display:block;width:26px;height:1px;background:rgba(201,169,110,0.6);flex-shrink:0;}
+.hero-title{
+  font-family:var(--font-serif);font-size:clamp(1.9rem,4vw,2.7rem);color:var(--cream);
+  letter-spacing:-1px;line-height:1.1;margin-bottom:14px;
+}
+.hero-title em{font-style:italic;color:rgba(245,233,215,0.62);}
+.hero-subtitle{font-size:.92rem;color:rgba(245,233,215,0.52);line-height:1.65;max-width:440px;font-weight:300;}
+.hero-right{flex-shrink:0;width:220px;}
+.hero-stat-row{background:rgba(0,0,0,0.22);border:1px solid rgba(245,233,215,0.10);border-radius:16px;overflow:hidden;}
+.hero-stat{padding:15px 20px;border-bottom:1px solid rgba(245,233,215,0.07);}
+.hero-stat:last-child{border-bottom:none;}
+.hero-stat-label{font-size:.55rem;font-weight:700;letter-spacing:.18em;color:rgba(245,233,215,0.4);text-transform:capitalize;margin-bottom:4px;}
+.hero-stat-value{font-family:var(--font-serif);font-size:1.6rem;color:var(--cream);letter-spacing:-.5px;line-height:1;margin-bottom:2px;}
+.hero-stat-sub{font-size:.68rem;color:rgba(245,233,215,0.32);}
+
+/* ---------- PAGE (cream-white content card) ---------- */
+.page-panel{
+  background:var(--paper);border-radius:0 0 26px 26px;box-shadow:var(--shadow);
+  animation:fadeUp .6s cubic-bezier(.22,.68,0,1.2) .08s both;
+  padding:36px 40px 44px;
+}
+
+/* ---------- filter bar ---------- */
+.filter-bar{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  margin:0 0 30px;
+}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--white);border:1.5px solid var(--line);
+  color:var(--brown);
+  padding:8px 15px;border-radius:999px;font-size:0.82rem;font-weight:500;
+  cursor:pointer;transition:all .18s;
+  user-select:none;
+}
+.chip:hover{border-color:var(--gold-line);}
+.chip.active{background:var(--gold);border-color:var(--gold);color:var(--cream);box-shadow:0 2px 8px rgba(78,52,46,0.25);}
+.chip .chip-x{opacity:.7;}
+.reset-btn{
+  background:none;border:none;color:var(--ink-soft);text-decoration:underline;
+  font-size:0.85rem;cursor:pointer;padding:8px 6px;
+}
+.reset-btn:hover{color:var(--brown-deep);}
+.result-count{color:var(--ink-faint);font-size:.82rem;margin-left:auto;padding:8px 0;white-space:nowrap;}
+
+/* ---------- sections ---------- */
+.section{margin-bottom:30px;}
+.section-title{
+  display:flex;align-items:baseline;gap:10px;margin-bottom:14px;
+}
+.section-title h2{font-size:1.15rem;}
+.section-title .sub{color:var(--ink-faint);font-size:.82rem;}
+
+.strip{
+  display:flex;gap:12px;overflow-x:auto;padding:4px 2px 10px;
+  scrollbar-width:thin;
+}
+.strip::-webkit-scrollbar{height:6px;}
+.strip::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px;}
+
+/* ---------- apartment grid & cards ---------- */
+.building-group{margin-bottom:30px;}
+.building-head.phase-label{
+  display:flex;align-items:baseline;gap:10px;
+  font-family:var(--font-serif);font-size:1.05rem;color:var(--gold);
+  margin:0 0 14px;padding:9px 18px;
+  background:var(--gold-pale);border-left:4px solid var(--gold-line);
+  border-radius:0 10px 10px 0;letter-spacing:.2px;
+}
+.building-head.phase-label h2{color:inherit;font-family:inherit;font-size:inherit;margin:0;}
+.building-head .count{color:var(--ink-faint);font-size:.78rem;font-family:var(--font-sans);}
+
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;
+}
+
+.card{
+  background:var(--white);
+  border-radius:16px;
+  border:1px solid var(--line-soft);
+  border-top:3px solid var(--gold-line);
+  box-shadow:0 2px 14px rgba(78,52,46,0.06);
+  padding:18px;
+  display:flex;flex-direction:column;gap:8px;
+  text-decoration:none;color:inherit;
+  position:relative;
+  cursor:pointer;
+  transition:transform .22s, box-shadow .22s;
+  min-width:200px;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(78,52,46,0.16);}
+.card:focus-visible{transform:translateY(-4px);}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.card-title{font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--brown-deep);line-height:1.2;}
+.card-building{font-size:.68rem;color:var(--gold);font-weight:700;text-transform:capitalize;letter-spacing:.09em;margin-bottom:2px;}
+.card-overview{font-size:.85rem;color:var(--ink-soft);line-height:1.5;font-weight:400;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:8px;}
+.tag-pill{
+  background:var(--gold-pale);color:var(--brown-mid);
+  font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:999px;
+  border:1px solid rgba(78,52,46,0.12);
+}
+.fav-btn{
+  background:none;border:none;cursor:pointer;padding:4px;color:var(--ink-faint);flex-shrink:0;
+  border-radius:8px;line-height:0;transition:color .15s;
+}
+.fav-btn:hover{color:var(--gold-glow);}
+.fav-btn.active{color:var(--gold-glow);}
+.fav-btn svg{width:20px;height:20px;}
+
+.compare-check{
+  position:absolute;top:12px;right:12px;
+  display:flex;align-items:center;gap:5px;
+  background:var(--white);border:1.5px solid var(--line);border-radius:999px;
+  padding:4px 9px 4px 7px;font-size:.68rem;font-weight:600;color:var(--ink-soft);
+  cursor:pointer;
+}
+.compare-check.active{background:var(--gold);border-color:var(--gold);color:var(--cream);}
+
+.mini-card{
+  flex:0 0 auto;width:190px;
+  background:var(--white);border:1px solid var(--line-soft);border-top:3px solid var(--gold-line);border-radius:16px;
+  padding:13px 15px;cursor:pointer;text-decoration:none;color:inherit;
+  box-shadow:0 2px 14px rgba(78,52,46,0.06);transition:transform .2s, box-shadow .2s;
+}
+.mini-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(78,52,46,0.14);}
+.mini-card .card-building{margin-bottom:1px;}
+.mini-card .card-title{font-size:1.1rem;}
+
+/* ---------- no results ---------- */
+.no-results{
+  text-align:center;padding:60px 20px;color:var(--ink-soft);
+}
+.no-results svg{width:52px;height:52px;color:var(--line);margin-bottom:14px;}
+.no-results h3{margin-bottom:6px;color:var(--brown-deep);}
+.no-results .reset-btn{font-size:1rem;margin-top:10px;}
+
+/* ---------- apartment detail ---------- */
+.back-row{padding:18px 0 0;max-width:1180px;margin:0 auto;}
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--brown-mid);
+  cursor:pointer;font-size:.88rem;font-weight:600;padding:6px 4px;letter-spacing:.02em;
+}
+.back-link:hover{color:var(--gold-glow);}
+.back-link svg{width:15px;height:15px;}
+
+.detail-hero{
+  background:linear-gradient(160deg, #3E2220 0%, #5C3428 55%, #4A2C24 100%);
+  color:var(--cream);border-radius:26px 26px 0 0;
+  padding:34px 40px 38px;
+  display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-start;
+  position:relative;overflow:hidden;
+  animation:fadeUp .5s cubic-bezier(.22,.68,0,1.2) both;
+}
+.detail-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%, rgba(201,169,110,0.10) 0%, transparent 60%);
+  pointer-events:none;
+}
+.detail-hero-main{flex:1;min-width:240px;position:relative;z-index:1;}
+.detail-building{
+  display:flex;align-items:center;gap:10px;
+  font-size:.62rem;font-weight:700;text-transform:capitalize;letter-spacing:.22em;color:rgba(245,233,215,0.5);margin-bottom:12px;
+}
+.detail-building::before{content:'';display:block;width:26px;height:1px;background:rgba(201,169,110,0.6);flex-shrink:0;}
+.detail-hero h1{color:var(--cream);font-size:clamp(1.9rem,3.4vw,2.5rem);margin-bottom:12px;letter-spacing:-.5px;}
+.detail-overview{color:rgba(245,233,215,0.62);max-width:56ch;font-size:.92rem;line-height:1.65;font-weight:300;}
+.detail-quickfacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.qf-pill{
+  background:rgba(245,233,215,0.10);border:1px solid rgba(245,233,215,0.22);
+  padding:6px 14px;border-radius:999px;font-size:.78rem;font-weight:700;text-transform:capitalize;letter-spacing:.03em;
+}
+.detail-actions{display:flex;flex-direction:column;gap:10px;align-items:flex-end;position:relative;z-index:1;}
+.airbnb-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold-line);color:var(--brown-deep);
+  padding:13px 24px;border-radius:999px;font-weight:700;font-size:.92rem;
+  text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.18);white-space:nowrap;
+  transition:transform .15s, box-shadow .15s;
+}
+.airbnb-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.24);}
+.airbnb-btn svg{width:16px;height:16px;}
+.hero-secondary{display:flex;gap:8px;}
+.ghost-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(245,233,215,0.08);border:1px solid rgba(245,233,215,0.25);color:var(--cream);
+  padding:9px 14px;border-radius:999px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .15s;
+}
+.ghost-btn:hover{background:rgba(245,233,215,0.18);}
+.ghost-btn svg{width:14px;height:14px;}
+.ghost-btn.on{background:var(--cream);color:var(--brown-deep);border-color:var(--cream);}
+
+.detail-page-panel{
+  background:var(--paper);border-radius:0 0 26px 26px;box-shadow:var(--shadow);
+  padding:36px 40px 40px;
+}
+.detail-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;
+}
+.panel{
+  background:var(--white);border:1px solid var(--line-soft);border-radius:16px;
+  padding:22px 22px;box-shadow:0 2px 14px rgba(78,52,46,0.05);
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+}
+.panel:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(78,52,46,0.10);border-color:var(--gold-line);}
+.panel.wide{grid-column:1 / -1;}
+.panel h3{
+  font-size:1.08rem;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:12px;
+  color:var(--brown-deep);font-family:var(--font-sans);text-transform:capitalize;letter-spacing:.035em;
+}
+.panel h3 .icon-box{
+  width:38px;height:38px;border-radius:11px;flex-shrink:0;
+  background:var(--gold-pale);border:1px solid rgba(78,52,46,0.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.panel h3 svg{width:18px;height:18px;color:var(--gold);flex-shrink:0;}
+.feat-list{display:flex;flex-direction:column;gap:14px;}
+.feat-item{
+  display:flex;align-items:flex-start;gap:10px;font-size:.96rem;color:var(--ink);line-height:1.55;font-weight:500;
+}
+.feat-item::before{
+  content:"";width:7px;height:7px;border-radius:50%;background:var(--gold-line);margin-top:8px;flex-shrink:0;
+}
+.feat-main{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;}
+.feat-text-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.feat-text{font-weight:700;color:var(--brown-deep);}
+.feat-item .info-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--white);color:var(--gold);cursor:pointer;flex-shrink:0;
+  border-radius:999px;font-size:.68rem;font-weight:800;text-transform:capitalize;letter-spacing:.04em;
+  border:1.4px solid var(--gold-line);padding:4px 10px 4px 8px;transition:all .15s;white-space:nowrap;
+}
+.feat-item .info-btn svg{width:11px;height:11px;flex-shrink:0;}
+.feat-item .info-btn:hover{background:var(--gold);color:var(--white);border-color:var(--gold);}
+.feat-explain{
+  font-size:.86rem;color:var(--brown-deep);background:var(--gold-pale);border-radius:9px;
+  padding:8px 12px;line-height:1.55;font-weight:500;border-left:3px solid var(--gold-line);
+}
+.feat-explain-label{
+  text-transform:capitalize;font-weight:800;letter-spacing:.06em;color:var(--gold);
+  margin-right:7px;font-size:.68rem;
+}
+.tv-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.tv-slot{background:var(--gold-pale);border-radius:12px;padding:13px 15px;}
+.tv-slot .tv-label{font-size:.7rem;text-transform:capitalize;letter-spacing:.1em;color:var(--gold-lt);margin-bottom:5px;font-weight:800;}
+.tv-slot .tv-value{font-size:1.08rem;color:var(--brown-deep);font-weight:800;}
+.tv-slot.empty .tv-value{color:var(--ink-faint);font-weight:500;font-style:italic;font-size:.85rem;text-transform:none;}
+
+.notice-box{
+  background:var(--white);border:1.5px solid rgba(78,52,46,0.2);border-left:4px solid var(--gold-line);
+  border-radius:12px;
+  padding:13px 16px;font-size:.92rem;color:var(--ink);display:flex;gap:10px;align-items:flex-start;
+  margin-top:10px;box-shadow:0 2px 10px rgba(78,52,46,0.06);font-weight:500;
+}
+.notice-box strong{text-transform:capitalize;letter-spacing:.03em;font-weight:800;}
+.notice-box svg{width:16px;height:16px;flex-shrink:0;margin-top:1px;color:var(--gold);}
+.notice-box.warn{background:var(--gold-pale);border-color:rgba(168,92,40,0.35);color:var(--brown-deep);}
+.notice-box.warn svg{color:#8A6A2A;}
+.notice-box.exception{background:var(--red-bg);border-left-color:var(--red);color:#7A1515;}
+.notice-box.exception svg{color:var(--red);}
+
+.chips-inline{display:flex;flex-wrap:wrap;gap:7px;}
+.chips-inline .tag-pill{font-size:.76rem;}
+
+/* ---------- info popover (template-card style) ---------- */
+.popover-backdrop{position:fixed;inset:0;background:rgba(62,39,35,0.35);z-index:150;}
+.popover{
+  position:fixed;z-index:151;background:var(--white);border-radius:16px;
+  box-shadow:var(--shadow-lg);max-width:340px;
+  border:1.5px solid var(--line-soft);overflow:hidden;
+}
+.popover-head{display:flex;align-items:center;gap:12px;padding:16px 18px 12px;}
+.popover-icon{width:36px;height:36px;border-radius:10px;background:var(--gold-pale);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;font-style:italic;font-weight:700;color:var(--gold);}
+.popover h4{font-size:1rem;margin-bottom:1px;}
+.popover .kind{color:var(--gold-lt);font-size:.66rem;text-transform:capitalize;letter-spacing:.1em;font-weight:700;}
+.popover-msg{
+  background:var(--gold-pale);border-top:1px solid var(--line-soft);
+  padding:13px 18px 15px;font-size:.86rem;color:var(--brown-deep);line-height:1.6;font-style:italic;
+}
+.popover-msg .ex{display:block;margin-top:8px;color:var(--brown-mid);}
+.popover-msg .caveat{display:block;margin-top:8px;font-style:normal;color:var(--ink-soft);font-size:.82rem;}
+.popover-msg a{color:var(--brown-mid);font-style:normal;}
+.popover .close-x{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--ink-faint);cursor:pointer;padding:5px;border-radius:50%;}
+.popover .close-x:hover{background:rgba(78,52,46,0.08);}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);
+  background:var(--brown-deep);color:var(--cream);padding:12px 22px;border-radius:999px;
+  font-size:.88rem;font-weight:600;box-shadow:var(--shadow-lg);
+  opacity:0;pointer-events:none;transition:opacity .18s, transform .18s;
+  z-index:300;display:flex;align-items:center;gap:8px;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast svg{width:16px;height:16px;color:var(--good);}
+
+/* ---------- compare bar & view ---------- */
+.compare-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:60;
+  background:rgba(59,34,24,0.98);color:var(--cream);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(245,233,215,0.15);
+  padding:12px 20px;display:flex;align-items:center;gap:16px;
+}
+.compare-bar-inner{max-width:1180px;margin:0 auto;width:100%;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.compare-slots{display:flex;gap:8px;flex:1;flex-wrap:wrap;}
+.compare-slot{
+  background:rgba(245,233,215,0.1);border:1px solid rgba(245,233,215,0.22);border-radius:999px;
+  padding:6px 8px 6px 14px;font-size:.82rem;display:flex;align-items:center;gap:8px;
+}
+.compare-slot button{background:none;border:none;color:var(--cream);opacity:.7;cursor:pointer;padding:2px;}
+.compare-slot button:hover{opacity:1;}
+.compare-cta{
+  background:var(--gold-line);color:var(--brown-deep);border:none;padding:10px 20px;border-radius:999px;
+  font-weight:700;cursor:pointer;font-size:.88rem;white-space:nowrap;transition:transform .15s;
+}
+.compare-cta:hover:not(:disabled){transform:translateY(-1px);}
+.compare-cta:disabled{opacity:.4;cursor:not-allowed;}
+.compare-cancel{background:none;border:none;color:rgba(245,233,215,.7);cursor:pointer;font-size:.82rem;text-decoration:underline;}
+
+.compare-table-wrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line-soft);background:var(--white);box-shadow:0 2px 14px rgba(78,52,46,0.06);}
+table.compare-table{width:100%;border-collapse:collapse;font-size:.87rem;min-width:560px;}
+table.compare-table th, table.compare-table td{
+  padding:14px 18px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top;
+}
+table.compare-table th{background:var(--gold-pale);font-family:var(--font-serif);font-weight:400;font-size:1.1rem;color:var(--brown-deep);position:sticky;top:0;border-bottom:2px solid var(--gold-line);}
+table.compare-table .row-label{font-weight:700;color:var(--gold);background:var(--gold-pale);white-space:nowrap;font-size:.72rem;text-transform:capitalize;letter-spacing:.08em;}
+table.compare-table tr.diff td{background:#FBF3E7;}
+table.compare-table tr:hover td{background:var(--cream-soft);}
+table.compare-table tr.diff:hover td{background:#F7ECD8;}
+table.compare-table td ul{padding-left:0;}
+table.compare-table td li{margin-bottom:4px;}
+
+/* ---------- glossary modal (template-card style) ---------- */
+.modal-backdrop{position:fixed;inset:0;background:rgba(62,39,35,0.45);z-index:180;display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;}
+.modal{
+  background:var(--paper);border-radius:22px;max-width:640px;width:100%;
+  box-shadow:var(--shadow-lg);padding:28px 28px 32px;position:relative;
+}
+.modal-head{margin-bottom:4px;}
+.modal-head h2{font-size:1.55rem;}
+.modal-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--ink-faint);cursor:pointer;padding:6px;border-radius:50%;}
+.modal-close:hover{background:rgba(78,52,46,0.08);color:var(--brown-deep);}
+.modal p.lead{color:var(--ink-soft);font-size:.88rem;margin-bottom:18px;font-weight:300;}
+.glossary-search{
+  display:flex;align-items:center;gap:8px;background:var(--white);border:1.5px solid var(--line-soft);
+  border-radius:999px;padding:9px 16px;margin-bottom:18px;
+}
+.glossary-search svg{width:15px;height:15px;color:var(--ink-faint);}
+.glossary-search input{border:none;background:none;flex:1;font-size:.9rem;font-family:inherit;color:var(--ink);}
+.glossary-search input:focus{outline:none;}
+.glossary-list{display:flex;flex-direction:column;gap:14px;max-height:56vh;overflow-y:auto;padding-right:4px;}
+.gloss-entry{
+  border:1.5px solid var(--line-soft);border-radius:14px;overflow:hidden;background:var(--white);
+  position:relative;flex-shrink:0;
+}
+.gloss-entry::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold-line);}
+.gloss-head{padding:13px 16px 10px 20px;}
+.gloss-entry h4{font-size:.98rem;margin-bottom:1px;}
+.gloss-entry .kind{color:var(--gold-lt);font-size:.64rem;text-transform:capitalize;font-weight:700;letter-spacing:.1em;}
+.gloss-body{background:var(--gold-pale);border-top:1px solid var(--line-soft);padding:11px 16px 13px 20px;font-size:.85rem;color:var(--brown-deep);line-height:1.55;font-style:italic;}
+
+/* ---------- closing footer ---------- */
+.closing{
+  background:linear-gradient(145deg, #3B2218 0%, #5C3728 55%, #4A2C22 100%);
+  border-radius:0 0 26px 26px;padding:48px 40px 46px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.closing-eyebrow{
+  font-size:.62rem;font-weight:600;letter-spacing:.2em;color:rgba(245,233,215,0.6);
+  text-transform:capitalize;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.closing-eyebrow::before, .closing-eyebrow::after{content:'';display:block;width:22px;height:1px;background:rgba(245,233,215,0.4);}
+.closing-title{font-family:var(--font-serif);font-size:1.7rem;color:var(--cream);margin-bottom:12px;letter-spacing:-.5px;}
+.closing-body{font-size:.86rem;color:rgba(245,233,215,0.6);line-height:1.7;max-width:460px;margin:0 auto 24px;font-weight:300;}
+.closing-brand{
+  display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
+  background:rgba(245,233,215,0.1);border:1.5px solid rgba(245,233,215,0.22);
+  border-radius:100px;padding:10px 22px;font-size:.78rem;font-weight:600;color:var(--cream);letter-spacing:.02em;
+}
+.closing-brand svg{width:18px;height:18px;color:var(--brown);}
+.closing-brand .accent{color:var(--gold-line);}
+
+/* ---------- utility ---------- */
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.empty-hint{color:var(--ink-faint);font-size:.88rem;padding:6px 2px;}
+
+@media (max-width:760px){
+  .topbar-inner{flex-wrap:wrap;padding:10px 16px;}
+  .brand{order:1;}
+  .topbar-actions{order:2;margin-left:auto;}
+  .global-search{order:3;flex-basis:100%;}
+  .icon-btn span.label-text{display:none;}
+
+  .home-hero{padding:26px 22px 28px;margin:0;border-radius:0;}
+  .hero-top{flex-direction:column;align-items:flex-start;gap:12px;}
+  .hero-doc-tag{text-align:left;}
+  .hero-doc-tagline{text-align:left;}
+  .hero-logo-box{width:44px;height:44px;border-radius:11px;}
+  .hero-logo-box svg{width:32px;height:32px;}
+  .hero-brand-text{font-size:1.05rem;}
+  .hero-mid{flex-direction:column;gap:20px;}
+  .hero-right{width:100%;}
+  .hero-stat-row{display:flex;}
+  .hero-stat{flex:1;border-bottom:none;border-right:1px solid rgba(245,233,215,0.07);}
+  .hero-stat:last-child{border-right:none;}
+
+  .page-panel, .detail-page-panel{padding:26px 18px 32px;border-radius:0;}
+
+  .detail-hero{flex-direction:column;padding:26px 20px 30px;border-radius:0;}
+  .detail-actions{align-items:stretch;width:100%;}
+  .airbnb-btn{justify-content:center;}
+  .hero-secondary{justify-content:stretch;flex-wrap:wrap;}
+  .hero-secondary .ghost-btn{flex:1 1 100%;justify-content:center;white-space:nowrap;}
+  .tv-pair{grid-template-columns:1fr;}
+
+  .closing{padding:36px 20px 34px;border-radius:0;}
+  .closing-title{font-size:1.4rem;}
+
+  .back-row{padding:14px 16px 0;}
+}
+</style>
+</head>
+
+<!-- Brand mark, reused from the Homes by Sujo SOP -->
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <symbol id="hbs-logo" viewBox="0 0 640 641">
+      <path d="M 314.401 105.791 C 312.697 107.281, 304.372 114.330, 295.901 121.455 C 287.431 128.580, 278.025 136.532, 275 139.125 C 271.975 141.719, 262.975 149.329, 255 156.036 C 247.025 162.744, 239.713 169.129, 238.750 170.227 C 237.132 172.072, 237 176.116, 237 224.039 C 237 269.813, 237.183 276.040, 238.571 277.429 C 239.949 278.806, 245.179 279, 280.871 279 C 311.216 279, 321.906 278.694, 322.800 277.800 C 323.536 277.064, 324 273.466, 324 268.495 L 324 260.390 338.928 246.731 C 362.621 225.051, 369.003 215.997, 369.782 202.956 C 370.156 196.695, 369.852 194.526, 367.990 190.199 C 361.035 174.031, 338.406 169.854, 326.042 182.456 C 323.590 184.955, 320.866 187, 319.988 187 C 319.110 187, 316.842 185.386, 314.946 183.412 C 309.572 177.818, 304.547 175.640, 297 175.636 C 272.982 175.623, 261.845 202.473, 276.833 224.258 C 281.110 230.474, 287.894 236.962, 299.509 245.946 C 313.538 256.796, 316 259.795, 316 266.035 L 316 271 280.534 271 L 245.068 271 245.020 223.173 L 244.971 175.345 281.487 144.423 C 301.571 127.415, 318.633 113.363, 319.403 113.196 C 320.556 112.945, 366.728 150.457, 388.250 169.129 L 394 174.118 394 225.359 C 394 277.471, 394.103 279, 397.629 279 C 398.304 279, 399.564 278.293, 400.429 277.429 C 401.817 276.040, 402 269.797, 402 223.863 C 402 189.866, 401.641 171.198, 400.963 169.930 C 400.113 168.344, 372.370 144.908, 328.533 108.747 C 324.700 105.586, 320.650 103.018, 319.533 103.041 C 318.415 103.063, 316.106 104.300, 314.401 105.791 M 292.225 184.152 C 280.245 186.887, 274.633 201.226, 280.561 213.959 C 284.262 221.910, 288.966 227.139, 300.366 235.974 C 305.940 240.293, 312.279 245.666, 314.453 247.913 C 316.627 250.161, 319.134 252, 320.025 252 C 320.915 252, 329.542 244.238, 339.197 234.750 C 353.163 221.026, 357.312 216.324, 359.495 211.745 C 365.703 198.727, 359.904 185.679, 346.992 183.615 C 338.776 182.301, 333.594 185.203, 325.194 195.821 C 320.468 201.794, 318.440 201.436, 312.699 193.617 C 306.355 184.976, 300.490 182.265, 292.225 184.152 M 162.250 292.662 C 160.084 293.536, 160.866 296, 163.309 296 C 164.579 296, 166.491 296.639, 167.559 297.419 C 169.396 298.762, 169.500 300.260, 169.500 325.265 C 169.500 353.924, 169.438 354.262, 163.978 355.354 C 162.209 355.708, 161 356.580, 161 357.502 C 161 358.846, 162.917 359.018, 175.250 358.777 C 189.649 358.497, 192.739 357.547, 186.165 355.422 C 184.331 354.829, 182.426 353.704, 181.931 352.922 C 181.436 352.140, 181.024 345.762, 181.015 338.750 L 181 326 197 326 L 213 326 213 339.378 C 213 353.671, 212.809 354.257, 207.744 355.528 C 206.235 355.907, 205 356.843, 205 357.608 C 205 358.731, 207.718 359, 219.073 359 C 231.915 359, 233.117 358.847, 232.811 357.258 C 232.613 356.228, 231.265 355.306, 229.515 355.003 C 224.430 354.122, 224.029 351.966, 224.029 325.500 C 224.029 299.020, 224.429 296.878, 229.527 295.995 C 231.264 295.694, 232.500 294.861, 232.500 293.990 C 232.500 292.773, 230.392 292.447, 221 292.210 C 214.675 292.050, 208.488 292.171, 207.250 292.479 C 203.853 293.323, 204.396 296, 207.965 296 C 212.228 296, 213 298.288, 213 310.934 L 213 322 197 322 L 181 322 181 310.571 C 181 298.483, 181.854 296, 186.012 296 C 188.450 296, 189.642 294.021, 187.878 292.904 C 186.438 291.992, 164.426 291.784, 162.250 292.662 M 259 310.977 C 250.365 312.821, 244.808 317.070, 241.367 324.459 C 235.672 336.690, 240.714 351.877, 252.485 357.945 C 257.202 360.377, 267.304 360.738, 272.282 358.652 C 281.406 354.828, 286.974 345.855, 286.990 334.946 C 287.008 323.032, 280.451 314.121, 269.592 311.304 C 264.121 309.885, 264.116 309.885, 259 310.977 M 322.759 311.378 C 320.702 312.137, 317.905 313.488, 316.544 314.379 C 313.084 316.646, 312 316.409, 312 313.383 C 312 311.055, 311.698 310.831, 309.250 311.349 C 307.738 311.669, 303.670 312.477, 300.211 313.145 C 295.440 314.067, 293.995 314.736, 294.223 315.918 C 294.388 316.776, 295.418 317.643, 296.511 317.846 C 300.769 318.636, 301 319.577, 301 336.122 C 301 350.667, 300.832 352.168, 299 354 C 297.900 355.100, 296.550 356, 296 356 C 295.450 356, 295 356.675, 295 357.500 C 295 358.746, 296.944 359, 306.500 359 C 315.181 359, 318 358.686, 318 357.719 C 318 357.015, 316.650 355.929, 315 355.306 L 312 354.174 312 338.676 L 312 323.178 315.133 320.541 C 317.778 318.316, 319.065 317.951, 323.383 318.202 C 330.871 318.638, 331.996 321.321, 331.998 338.750 C 332 350.668, 331.799 352.201, 330 354 C 328.900 355.100, 327.550 356, 327 356 C 326.450 356, 326 356.675, 326 357.500 C 326 358.747, 327.953 359, 337.573 359 C 347.944 359, 349.113 358.823, 348.818 357.294 C 348.637 356.355, 347.367 355.323, 345.995 355 L 343.500 354.412 343.213 339.956 C 343.055 332.005, 343.149 324.595, 343.422 323.490 C 344.660 318.470, 356.069 316.069, 360 320 C 361.827 321.827, 362 323.333, 362 337.429 C 362 350.121, 361.721 353.136, 360.429 354.429 C 359.564 355.293, 358.214 356, 357.429 356 C 356.643 356, 356 356.675, 356 357.500 C 356 358.746, 357.944 359, 367.500 359 C 377.056 359, 379 358.746, 379 357.500 C 379 356.675, 378.550 356, 378 356 C 377.450 356, 376.100 355.100, 375 354 C 373.179 352.179, 373 350.667, 373 337.065 C 373 328.851, 372.520 320.863, 371.933 319.315 C 368.354 309.867, 356.943 307.609, 347.133 314.408 C 342.949 317.307, 340.211 317.714, 339.385 315.560 C 337.785 311.391, 328.829 309.138, 322.759 311.378 M 402.500 310.881 C 397.921 312.059, 395.657 313.530, 391.720 317.888 C 387.988 322.019, 385 329.860, 385 335.523 C 385 340.206, 387.503 347.676, 390.543 352.062 C 397.626 362.282, 416.074 362.831, 424.291 353.066 C 425.781 351.295, 427 349.206, 427 348.423 C 427 346.333, 424.591 346.689, 422.407 349.102 C 417.807 354.186, 411.441 355.294, 405.210 352.095 C 400.375 349.613, 397.923 345.243, 397.259 337.923 L 396.722 332 411.861 332 L 427 332 427 328.065 C 427 321.128, 423.709 315.480, 417.906 312.460 C 414.580 310.729, 406.365 309.887, 402.500 310.881 M 449.500 310.929 C 445.059 312, 442.529 313.582, 439.500 317.182 C 437.155 319.969, 436.848 321.069, 437.250 325.251 C 437.846 331.450, 440.520 334.293, 451.008 339.882 C 461.517 345.481, 463.327 348.763, 458.545 353.545 C 453.444 358.647, 444.672 355.597, 441.390 347.582 C 438.525 340.582, 436.500 341.754, 436.500 350.413 L 436.500 357.299 440.500 358.686 C 442.700 359.449, 447.208 360.095, 450.517 360.122 C 461.378 360.209, 468.375 355.624, 469.683 347.564 C 470.881 340.187, 467.644 335.860, 456.869 330.434 C 448.782 326.362, 447 324.673, 447 321.084 C 447 317.489, 449.821 315, 453.894 315 C 458.463 315, 460.691 316.473, 463.017 321.033 C 466.187 327.246, 468.160 326.332, 467.798 318.818 C 467.526 313.179, 467.280 312.578, 465 311.976 C 460.288 310.731, 452.500 310.205, 449.500 310.929 M 403.142 315.580 C 400.877 317.198, 397.068 324.151, 397.022 326.750 C 397.006 327.664, 399.555 328, 406.500 328 L 416 328 416 324.056 C 416 316.761, 408.453 311.787, 403.142 315.580 M 256.017 317.829 C 252.528 321.319, 251.011 326.520, 251.011 335 C 251.011 343.485, 252.415 348.264, 256.158 352.527 C 260.035 356.943, 265.259 357.343, 269.364 353.538 C 277.203 346.273, 277.571 324.699, 269.975 317.750 C 265.749 313.884, 259.929 313.917, 256.017 317.829 M 298.759 378.423 C 290.648 381.318, 286.580 385.953, 285.432 393.605 C 284.637 398.907, 287.512 405.804, 291.785 408.847 C 293.456 410.037, 298.575 412.744, 303.162 414.864 C 313.614 419.695, 315.500 421.703, 315.500 428 C 315.500 433.581, 313.529 436.340, 308.314 438.061 C 300.672 440.583, 293.666 436.559, 289.906 427.487 C 288.288 423.583, 287.088 422, 285.747 422 C 283.997 422, 283.912 422.589, 284.559 430.250 C 284.942 434.788, 285.446 438.832, 285.678 439.237 C 286.748 441.098, 297.588 443.189, 304.362 442.840 C 312.781 442.407, 318.040 440.031, 322.340 434.719 C 325.784 430.464, 327.003 422.837, 325.009 418.022 C 323.095 413.400, 316.776 408.342, 307.649 404.125 C 297.315 399.351, 295 397.022, 295 391.400 C 295 385.504, 299.100 382, 306 382 C 311.880 382, 315.972 384.973, 318.382 390.996 C 319.263 393.198, 320.662 395, 321.492 395 C 322.702 395, 323 393.520, 323 387.519 C 323 380.579, 322.837 380.001, 320.750 379.527 C 307.715 376.567, 304.422 376.402, 298.759 378.423 M 394.655 379.829 C 392.719 381.968, 392.484 386.084, 394.200 387.800 C 394.860 388.460, 396.795 389, 398.500 389 C 400.205 389, 402.140 388.460, 402.800 387.800 C 403.460 387.140, 404 385.205, 404 383.500 C 404 381.795, 403.460 379.860, 402.800 379.200 C 401.007 377.407, 396.534 377.752, 394.655 379.829 M 214.500 379.655 C 213.400 379.888, 211.488 380.294, 210.250 380.558 C 207.463 381.153, 207.274 383, 210 383 C 212.664 383, 212.581 385.016, 209.432 396.850 C 201.721 425.829, 201.855 425.130, 203.500 427.641 C 206.939 432.889, 215.096 431.417, 223.262 424.075 C 229.286 418.659, 231.948 413.282, 231.978 406.473 C 232.018 397.245, 227.177 394.477, 219.785 399.500 C 216.422 401.785, 214 402.653, 214 401.572 C 214 401.037, 218.568 383.938, 219.470 381.095 C 220.160 378.921, 219.236 378.654, 214.500 379.655 M 239.326 397.484 C 236.920 399.169, 234.648 404.665, 236.010 405.506 C 236.499 405.808, 237.388 405.143, 237.985 404.028 C 239.427 401.334, 241.842 401.453, 242.913 404.271 C 244.129 407.469, 245.363 427.252, 244.600 431.319 C 243.874 435.187, 237.636 442, 234.820 442 C 233.804 442, 232.086 441.446, 231.003 440.770 C 229.365 439.747, 228.734 439.842, 227.266 441.334 C 225.577 443.051, 225.598 443.210, 227.768 444.990 C 232.235 448.653, 239.928 444.163, 248.096 433.125 C 253.760 425.470, 261.366 410.649, 263.173 403.745 C 264.275 399.535, 264.220 398.791, 262.690 397.262 C 261.372 395.944, 260.561 395.787, 259.271 396.601 C 257.955 397.431, 257.570 399.205, 257.540 404.584 C 257.511 409.602, 256.832 413.078, 255.066 417.250 C 251.519 425.628, 250.352 424.743, 249.794 413.250 C 249.305 403.195, 247.580 397.820, 244.455 396.621 C 242.162 395.741, 241.705 395.818, 239.326 397.484 M 428.615 397.472 C 414.052 402.663, 409.302 422.815, 419.761 435.034 C 424.599 440.686, 428.229 442.294, 436.146 442.294 C 447.548 442.294, 455.498 435.836, 458.003 424.537 C 462.024 406.407, 445.707 391.381, 428.615 397.472 M 337 398.375 C 332.429 399.170, 330.500 399.946, 330.500 400.989 C 330.500 401.805, 331.400 402.640, 332.500 402.844 C 336.699 403.624, 337 404.694, 337.002 418.872 C 337.003 434.554, 338.171 438.296, 344 441.309 C 348.382 443.573, 356.225 442.949, 360.187 440.020 C 363.807 437.344, 367 437.357, 367 440.050 C 367 441.964, 367.412 442.058, 373.250 441.471 C 376.688 441.126, 380.063 440.668, 380.750 440.453 C 382.773 439.822, 382.189 437, 380.035 437 C 376.589 437, 376 433.800, 376 415.066 C 376 394.496, 377.053 396.255, 366 398.363 C 361.594 399.202, 359.500 400.064, 359.500 401.037 C 359.500 401.827, 360.400 402.640, 361.500 402.844 C 365.669 403.618, 366 404.737, 366 418.072 L 366 430.898 362.656 433.449 C 357.966 437.026, 351.923 436.989, 349.073 433.365 C 347.162 430.936, 347 429.413, 347 413.865 C 347 398.423, 346.852 397.010, 345.250 397.122 C 344.288 397.189, 340.575 397.753, 337 398.375 M 393.685 398.528 C 390.487 399.225, 387.630 400.037, 387.335 400.331 C 386.404 401.263, 388.047 403, 389.859 403 C 393.762 403, 394 404.560, 394 430.153 C 394 455.134, 393.395 460, 390.292 460 C 389.528 460, 387.828 458.762, 386.513 457.250 C 384.587 455.035, 383.782 454.708, 382.377 455.567 C 377.781 458.379, 378.116 462.034, 383.236 464.942 C 386.831 466.984, 393.363 464.873, 398.090 460.142 C 403.290 454.939, 404 450.290, 404 421.451 L 404 397 401.750 397.130 C 400.512 397.202, 396.883 397.831, 393.685 398.528 M 432.090 401.265 C 427.614 403.559, 425.496 409.454, 425.537 419.500 C 425.588 432.029, 429.291 438.400, 436.522 438.400 C 443.470 438.400, 447.412 431.524, 447.356 419.500 C 447.316 410.726, 445.711 405.776, 441.857 402.533 C 438.545 399.746, 435.759 399.384, 432.090 401.265 M 216.850 405.712 C 211.898 410.880, 209.769 415.475, 209.623 421.312 C 209.531 425.002, 209.939 426.515, 211.259 427.366 C 216.995 431.066, 228.295 413.450, 225.431 405.273 C 223.988 401.152, 221.077 401.301, 216.850 405.712" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm9 2-4.35-4.35"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2 2.9 6.6 7.1.7-5.4 4.7 1.6 7-6.2-3.7L5.8 21l1.6-7L2 9.3l7.1-.7Z"/></symbol>
+    <symbol id="i-star-o" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m12 2 2.9 6.6 7.1.7-5.4 4.7 1.6 7-6.2-3.7L5.8 21l1.6-7L2 9.3l7.1-.7Z"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 6l3 7a3.5 3.5 0 0 0 7 0M4 6l-3 7M20 6l3 7a3.5 3.5 0 0 1-7 0M20 6l-3 7M12 6v14M8 20h8"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m6-7-7 7 7 7"/></symbol>
+    <symbol id="i-airbnb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-6M15 3h6v6M10 14 21 3"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 9h10v10H9zM5 15V5h10"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v13H3zM8 21h8M12 17v4"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 9v6h4l5 5V4L8 9H4ZM16.5 8.5a5 5 0 0 1 0 7M19.5 5.5a9 9 0 0 1 0 13"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8h14v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8ZM17 8h1.5a2.5 2.5 0 0 1 0 5H17M6 3c0 1-1 1-1 2M10 3c0 1-1 1-1 2"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6M3 18v2M21 18v2M3 12V6h5v6"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.5.4.8 1 .8 1.6V16h5.4v-.5c0-.6.3-1.2.8-1.6A6 6 0 0 0 12 3Z"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 21V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v16M12 21V10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v11M4 21h16M8 8h.01M8 12h.01M8 16h.01"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM12 16v-5M12 8h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM12 6v6l4 2"/></symbol>
+  </defs>
+</svg>
+
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="brand" id="brandHome" aria-label="Homes by Sujo — go to home">
+      <svg viewBox="0 0 640 641"><use href="#hbs-logo"/></svg>
+      <span class="brand-text">Homes&nbsp;<em>by</em>&nbsp;Sujo</span>
+    </button>
+    <div class="global-search" role="search">
+      <svg aria-hidden="true"><use href="#i-search"/></svg>
+      <input id="searchInput" type="text" placeholder="Search building, apartment number, or equipment…" aria-label="Search apartments">
+      <button class="search-clear visually-hidden" id="searchClearBtn" aria-label="Clear search"><svg width="16" height="16"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="glossaryBtn"><svg><use href="#i-book"/></svg><span class="label-text">Glossary</span></button>
+      <button class="icon-btn" id="compareBtn"><svg><use href="#i-scale"/></svg><span class="label-text">Compare</span><span class="count-badge" id="compareCount" hidden>0</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<div id="compareBarSlot"></div>
+<div id="modalSlot"></div>
+<div id="popoverSlot"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   Homes by Sujo — Co-Host Apartment Guide
+   DATA FILE — kept separate from presentation on purpose.
+   Source: Homes_by_Sujo_CoHost_Apartment_Guide.pdf (06 Sep 2026)
+   Every fact below traces back to that PDF. Where the PDF says
+   something is "not yet confirmed" or "not provided", that is
+   recorded in `gaps` rather than guessed at.
+   ============================================================ */
+
+window.HBS_DATA = {
+
+  /* ---------- Buildings, in source order ---------- */
+  buildings: [
+    { id: "tower-60",        name: "Tower 60" },
+    { id: "tower-62",        name: "Tower 62" },
+    { id: "saleena",         name: "Saleena Residence" },
+    { id: "ra",              name: "R & A Apartments" },
+    { id: "jassem",          name: "Jassem Apartments" },
+    { id: "fatema",          name: "Fatema Apartments" },
+    { id: "fatema-premium",  name: "Fatema Apartments (Premium)" },
+    { id: "dana",            name: "Dana Residence" }
+  ],
+
+  /* ---------- Equipment glossary ----------
+     Matched automatically wherever these terms appear in an
+     apartment's feature text, so co-hosts get a "what is this"
+     explanation without every apartment re-typing it. */
+  glossary: [
+    {
+      id: "dolby-atmos",
+      match: ["dolby atmos", "atmos"],
+      term: "Dolby Atmos",
+      kind: "Sound technology",
+      short: "Sound that can feel like it comes from around and above you.",
+      guestLine: "With supported films and games, sound can feel as though it comes from around and above you, creating a cinema-like experience.",
+      example: "A helicopter can sound like it's flying overhead, with the effect moving through the room.",
+      caveat: "Samsung is the brand and the soundbar is the model — Dolby Atmos is the audio technology itself. It needs Atmos-mastered content and the right playback setup; an ordinary programme won't produce the effect.",
+      source: "https://www.dolby.com/technologies/dolby-atmos/"
+    },
+    {
+      id: "q-symphony",
+      match: ["q-symphony", "q symphony"],
+      term: "Samsung Q-Symphony",
+      kind: "Sound technology",
+      short: "Lets a compatible Samsung TV and soundbar play sound together for a fuller effect.",
+      guestLine: "The TV's own speakers add to the soundbar, so sound is fuller and more precise.",
+      caveat: "Requires a compatible Samsung TV and soundbar pair — a Samsung soundbar alone doesn't confirm this feature.",
+      source: "https://www.samsung.com/sg/support/tv-audio-video/how-to-enjoy-q-symphony-on-your-samsung-tv/"
+    },
+    {
+      id: "philips-hue",
+      match: ["philips hue", "hue lighting", "hue ambient", "hue color", "hue adjustable"],
+      term: "Philips Hue",
+      kind: "Ambient lighting",
+      short: "Adjustable smart lighting for colour and atmosphere.",
+      guestLine: "Lets you change the room's lighting colour and mood, usually from an app or voice assistant."
+    },
+    {
+      id: "sonos-move-2",
+      term: "Sonos Move 2",
+      kind: "Portable speaker",
+      short: "A portable speaker for playing music.",
+      guestLine: "Bluetooth/Wi-Fi speaker you can move around the apartment to play music."
+    },
+    {
+      id: "dr-vranjes",
+      match: ["dr. vranjes", "dr vranjes"],
+      term: "Dr. Vranjes diffuser",
+      kind: "Fragrance diffuser",
+      short: "Adds fragrance to the apartment.",
+      guestLine: "An oil diffuser that scents the room — different purpose from an air purifier."
+    },
+    {
+      id: "air-purifier",
+      match: ["air purifier"],
+      term: "Air purifier (Dyson / Philips)",
+      kind: "Air quality",
+      short: "Filters the room air.",
+      guestLine: "Filters air quality in the room; it does not add fragrance — that's the separate diffuser."
+    },
+    {
+      id: "nespresso",
+      match: ["nespresso"],
+      term: "Nespresso machine",
+      kind: "Coffee",
+      short: "A capsule coffee machine.",
+      guestLine: "Uses coffee capsules/pods — check the apartment for the capsule flavours provided."
+    },
+    {
+      id: "espresso-5500",
+      match: ["philips 5500", "automatic espresso"],
+      term: "Philips 5500-series espresso machine",
+      kind: "Coffee",
+      short: "Bean-to-cup machine — no capsules needed.",
+      guestLine: "Makes over 20 café-style drinks from whole beans, without capsules."
+    },
+    {
+      id: "ps5",
+      match: ["ps5"],
+      term: "PS5",
+      kind: "Gaming console",
+      short: "Sony PlayStation 5 games console.",
+      guestLine: "Connect a controller and pick a game from the shelf, or the titles listed for this apartment."
+    },
+    {
+      id: "smart-lock",
+      match: ["smart-lock self check-in", "smart lock self check-in", "electronic keypad", "electronic number lock", "smart-lock self check-in/out"],
+      term: "Smart-lock self check-in",
+      kind: "Access",
+      short: "Guests let themselves in with a code.",
+      guestLine: "No key handover needed — guests enter using the code sent before arrival."
+    },
+    {
+      id: "alexa",
+      match: ["alexa"],
+      term: "Alexa smart-home system",
+      kind: "Smart home",
+      short: "Voice-controlled smart-home assistant.",
+      guestLine: "Can control lighting, curtains or music by voice, where set up."
+    }
+  ],
+
+  /* ---------- Apartments ---------- */
+  apartments: [
+
+    /* ================= TOWER 60 ================= */
+    {
+      id: "tower-60-301", buildingId: "tower-60", number: "301",
+      overview: "One-bedroom apartment with a 100-inch TCL TV, surround sound and a private balcony/terrace with seating and a swing. Described as suitable for relaxing stays or business trips.",
+      airbnb: "https://www.airbnb.com/rooms/1513070060825423521",
+      quickFacts: [
+        "1 bedroom",
+        "2 beds",
+        "1.5 bathrooms",
+        "Max 2 guests"
+      ],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "100-inch TCL TV", bedroom: "65-inch TV" },
+      entertainment: [
+        "Samsung Dolby Atmos 9.2.1 soundbar — same setup as Tower 62 Apartment 1701",
+        "Sonos Move 2 portable speaker",
+        "PS5 gaming console",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Philips 5500-series automatic espresso machine — over 20 café-style drinks, no capsules",
+        "Fully equipped kitchen with pans and cooking equipment",
+        "Complimentary juice, drinks and snacks"
+      ],
+      bedroomBathroomLaundry: [
+        "Bedroom: one king bed"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Private balcony/terrace with seating and a swing",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Pool access",
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Taxi pickups from the airport"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "balcony",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "pool",
+        "tcl",
+        "espresso",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "tower-60-302", buildingId: "tower-60", number: "302",
+      overview: "Modern one-bedroom apartment in central Salmiya with a 100-inch home cinema and private balcony. Warm ambient lighting and elegant interiors.",
+      airbnb: "https://www.airbnb.com/rooms/1512357346731156508",
+      quickFacts: [
+        "1 bedroom",
+        "Exclusive use of the apartment"
+      ],
+      checkIn: "Smart-lock self check-in with a unique code sent before arrival",
+      tv: { livingRoom: "100-inch Samsung TV", bedroom: "65-inch TV" },
+      entertainment: [
+        "Samsung Dolby Atmos 9.2.1 sound system — same setup as Tower 62 Apartment 1701",
+        "Sonos Move 2 portable speaker",
+        "PS5 with two controllers and games",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Philips 5500-series automatic espresso machine — over 20 café-style drinks, no capsules",
+        "Unlimited mineral water and soft drinks"
+      ],
+      bedroomBathroomLaundry: [
+        "Bedroom: one king bed",
+        "Dyson hair dryer set",
+        "Dr. Vranjes oil diffusers"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Smart AC thermostat",
+        "High-speed 5G Wi-Fi",
+        "Private balcony, spacious living area",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Swimming pool",
+        "Elevator",
+        "Free parking",
+        "24/7 security"
+      ],
+      servicesIncluded: [
+        "Taxi pickups from the airport"
+      ],
+      serviceExceptions: [
+        "Concierge services, including car transportation and airport transfers, are not provided."
+      ],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "balcony",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "pool",
+        "espresso",
+        "air-purifier",
+        "diffuser"
+      ]
+    },
+    {
+      id: "tower-60-1601", buildingId: "tower-60", number: "1601",
+      overview: "High-floor apartment with sea and city views, designed for a comfortable, relaxing stay. Thoughtfully designed interiors, modern living and premium hospitality.",
+      airbnb: "https://www.airbnb.com/rooms/1513029409551742821",
+      quickFacts: [
+        "Sea and city views"
+      ],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "87-inch Samsung TV", bedroom: "65-inch TV" },
+      entertainment: [
+        "Samsung Dolby Atmos 9.2.1 sound system",
+        "Sonos Move 2 portable wireless speaker",
+        "PS5 game console",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Nespresso machine with complimentary capsules"
+      ],
+      bedroomBathroomLaundry: [
+        "Bedroom: one king bed"
+      ],
+      lightingComfort: [
+        "Philips Hue adjustable mood lighting",
+        "Dr. Vranjes fragrance diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Swimming pool access",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [
+        "Bathroom equipment is not itemised in the source description."
+      ],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "diffuser",
+        "pool",
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "tower-60-1602", buildingId: "tower-60", number: "1602",
+      overview: "High-floor sea-view apartment near Blajat Roundabout, with a queen bed, smart lighting and a home-cinema setup.",
+      airbnb: "https://www.airbnb.com/rooms/1512307126992911831",
+      quickFacts: [
+        "Queen bed with premium linens",
+        "Exclusive apartment use"
+      ],
+      checkIn: "Smart-lock self check-in with a unique code before arrival",
+      tv: { livingRoom: "85-inch TCL 4K TV", bedroom: "65-inch TV" },
+      entertainment: [
+        "Samsung Dolby Atmos Q-Symphony system, described as 9.2.1",
+        "Sonos Move 2 portable wireless speaker",
+        "PS5 with PS Plus membership",
+        "Netflix, TOD, Disney+, OSN, YouTube and Shahid included",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Nespresso machine with complimentary capsules",
+        "Fully equipped kitchen with utensils, cookware and dining items",
+        "Small complimentary drink selection for moderate use"
+      ],
+      bedroomBathroomLaundry: [
+        "Queen bed with premium linens",
+        "Washing machine"
+      ],
+      lightingComfort: [
+        "Philips Hue colour/brightness lighting in living room, bedroom and kitchen",
+        "High-speed 5G Wi-Fi",
+        "Smart AC thermostat",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Pool",
+        "Elevator",
+        "Free parking",
+        "24/7 security and concierge"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Smoking permitted by the window with ventilation",
+        "Keep noise low after 10 PM",
+        "Early check-in/late checkout may be requested but are not guaranteed",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "q-symphony",
+        "hue",
+        "sonos",
+        "pool",
+        "concierge",
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+
+    /* ================= TOWER 62 ================= */
+    {
+      id: "tower-62-1401", buildingId: "tower-62", number: "1401",
+      overview: "14th-floor Twin Tower apartment with panoramic sea/city views, a 98-inch TV and premium entertainment. Floor-to-ceiling windows, minimal design and warm lighting.",
+      airbnb: "https://www.airbnb.com/rooms/1655120519270556104",
+      quickFacts: [
+        "Max 2 guests, including the booker",
+        "Digital ID required"
+      ],
+      checkIn: "Smart-lock self check-in/out",
+      tv: { livingRoom: "98-inch Samsung Smart TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Samsung 9.2.1 Dolby Atmos system",
+        "Sonos Move 2 portable speaker",
+        "PS5 Slim Disc with two controllers — FC26, Call of Duty Black Ops 7, God of War Ragnarok, Gran Turismo 7",
+        "Netflix, Disney+, Amazon Prime, OSN+, Starzplay Max, MBC Shahid, YouTube Premium and TOD/beIN Sports 4K",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Fully equipped kitchen",
+        "Nespresso machine with complimentary capsules",
+        "Complimentary soft drinks, juice and water"
+      ],
+      bedroomBathroomLaundry: [
+        "Dyson Nural hair dryer",
+        "Full toiletries"
+      ],
+      lightingComfort: [
+        "Philips Hue lighting",
+        "Dr. Vranjes fragrance diffuser",
+        "Ultra-fast Wi-Fi",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Swimming pool",
+        "Hotel-quality gym access",
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Professional cleaning before each stay"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "nespresso",
+        "pool",
+        "gym",
+        "diffuser",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "tower-62-1402", buildingId: "tower-62", number: "1402",
+      overview: "14th-floor sea- and city-view apartment for up to two guests, with PS5, large TVs, pool and gym access. Floor-to-ceiling windows, minimal design with warm lighting.",
+      airbnb: "https://www.airbnb.com/rooms/1655483166538122556",
+      quickFacts: [
+        "Exclusive access",
+        "Max 2 guests",
+        "Digital ID requested before self check-in"
+      ],
+      checkIn: "Smart-lock self check-in and checkout",
+      tv: { livingRoom: "85-inch Samsung Smart TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Samsung 9.2.1 Dolby Atmos sound system",
+        "Sonos Move 2 portable speaker",
+        "PS5 Slim Disc with two controllers — FC26, Call of Duty Black Ops 7, God of War Ragnarok, Gran Turismo 7",
+        "Netflix, Disney+, Amazon Prime, OSN+, Starzplay Max, MBC Shahid, YouTube Premium and TOD/beIN Sports 4K",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Fully equipped kitchen",
+        "Nespresso machine with complimentary capsules",
+        "Complimentary soft drinks, juice and water"
+      ],
+      bedroomBathroomLaundry: [
+        "Full toiletries"
+      ],
+      lightingComfort: [
+        "Philips Hue lighting",
+        "Dr. Vranjes diffuser",
+        "Ultra-fast Wi-Fi",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Pool and hotel-quality gym access",
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Professionally cleaned before each stay"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "nespresso",
+        "pool",
+        "gym",
+        "diffuser",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "tower-62-1501", buildingId: "tower-62", number: "1501",
+      overview: "15th-floor sea-view apartment in Twin Tower, with a large entertainment setup and smart lighting. Floor-to-ceiling windows, minimal design with warm lighting.",
+      airbnb: "https://www.airbnb.com/rooms/1686329849924474315",
+      quickFacts: [],
+      checkIn: "Smart-lock self check-in and checkout",
+      tv: { livingRoom: "85-inch Samsung Smart TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Samsung 9.2.1 Dolby Atmos sound system",
+        "Sonos Move 2 portable speaker",
+        "PS5 Slim Disc with two controllers — FC26, Call of Duty Black Ops 7, God of War Ragnarok, Gran Turismo 7",
+        "Netflix, Disney+, Amazon Prime, OSN+, Starzplay Max, MBC Shahid, YouTube Premium and TOD/beIN Sports 4K",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Fully equipped kitchen",
+        "Nespresso machine with complimentary capsules",
+        "Complimentary soft drinks, juice and water"
+      ],
+      bedroomBathroomLaundry: [
+        "Full toiletries"
+      ],
+      lightingComfort: [
+        "Philips Hue lighting",
+        "Dr. Vranjes diffuser",
+        "Ultra-fast Wi-Fi",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Pool and hotel-quality gym access",
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Professionally cleaned before each stay"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "nespresso",
+        "pool",
+        "gym",
+        "diffuser",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "tower-62-1502", buildingId: "tower-62", number: "1502",
+      overview: "15th-floor sea- and city-view apartment with an 85-inch Samsung living-room TV, PS5, pool and gym access. Exclusive use of the entire apartment on the 15th floor.",
+      airbnb: "https://www.airbnb.com/rooms/1686419183451552617",
+      quickFacts: [
+        "Exclusive use of the floor"
+      ],
+      checkIn: "Smart-lock self check-in and checkout",
+      tv: { livingRoom: "85-inch Samsung Smart TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Samsung 9.2.1 Dolby Atmos sound system",
+        "Sonos Move 2 portable speaker",
+        "PS5 Slim Disc with two controllers — FC26, Call of Duty Black Ops 7, God of War Ragnarok, Gran Turismo 7",
+        "Netflix, Disney+, Amazon Prime, OSN+, Starzplay Max, MBC Shahid, YouTube Premium and TOD/beIN Sports 4K",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Fully equipped kitchen",
+        "Nespresso machine with complimentary capsules",
+        "Complimentary soft drinks, juice and water"
+      ],
+      bedroomBathroomLaundry: [
+        "Full toiletries"
+      ],
+      lightingComfort: [
+        "Philips Hue lighting",
+        "Dr. Vranjes diffuser",
+        "Ultra-fast Wi-Fi",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Pool and hotel-quality gym access",
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Professionally cleaned before each stay"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "nespresso",
+        "pool",
+        "gym",
+        "diffuser",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "tower-62-1601", buildingId: "tower-62", number: "1601",
+      overview: "16th-floor one-bedroom apartment in the residential Twin Towers, with sea/skyline views and only two apartments on the floor. Sectional sofa, automatic curtains, ambient lighting.",
+      airbnb: "https://www.airbnb.com/rooms/1421223255063994391",
+      quickFacts: [
+        "Entire apartment",
+        "Suitable for solo travellers or couples",
+        "Long stays welcome"
+      ],
+      checkIn: "Smart-lock self check-in/out — code sent a few hours before check-in",
+      tv: { livingRoom: "86-inch QLED TV", bedroom: "65-inch 4K TV, queen bed" },
+      entertainment: [
+        "Samsung Dolby Atmos 9.2.1 sound system",
+        "Sonos Move 2 portable speaker",
+        "PS5 Slim Disc with two controllers — FC25, Spider-Man: Miles Morales, Assassin's Creed Mirage, Gran Turismo 7, God of War Ragnarok",
+        "Netflix, Shahid VIP, OSN+, TOD and Disney+",
+        "Alexa smart-home system",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Nespresso machine with complimentary capsules",
+        "Fully equipped kitchen",
+        "Complimentary soft drinks and juice"
+      ],
+      bedroomBathroomLaundry: [
+        "Towels and toiletries"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Dr. Vranjes fragrance diffuser",
+        "Fast 5G Wi-Fi",
+        "Smart AC",
+        "Automatic curtains",
+        "Sectional sofa",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Indoor swimming pool",
+        "Gym",
+        "Ample parking",
+        "Elevator"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours begin at 10 PM",
+        "Flexible arrival/departure times depend on availability",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "pool",
+        "gym",
+        "alexa",
+        "diffuser",
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "tower-62-1602", buildingId: "tower-62", number: "1602",
+      overview: "16th-floor one-bedroom apartment in the residential Twin Towers, with sea/skyline views and only two apartments on the floor. Sectional sofa, ambient lighting.",
+      airbnb: "https://www.airbnb.com/rooms/1421807199423219066",
+      quickFacts: [
+        "Long stays welcome"
+      ],
+      checkIn: "Smart-lock self check-in/out — code sent a few hours before check-in",
+      tv: { livingRoom: "86-inch QLED TV", bedroom: "65-inch 4K TV, queen bed" },
+      entertainment: [
+        "Samsung Dolby Atmos 9.2.1 sound system",
+        "Sonos Move 2 portable speaker",
+        "PS5 Slim Disc with two controllers — FC25, Spider-Man: Miles Morales, Assassin's Creed Mirage, Gran Turismo 7, God of War Ragnarok",
+        "Netflix, Shahid VIP, OSN+, TOD and Disney+",
+        "Alexa smart-home system",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Nespresso machine with complimentary capsules",
+        "Fully equipped kitchen",
+        "Complimentary soft drinks and juice"
+      ],
+      bedroomBathroomLaundry: [
+        "Towels and toiletries"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Dr. Vranjes fragrance diffuser",
+        "Fast 5G Wi-Fi",
+        "Sectional sofa",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Indoor swimming pool",
+        "Gym",
+        "Ample parking",
+        "Elevator"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours begin at 10 PM",
+        "Flexible arrival/departure times depend on availability",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "pool",
+        "gym",
+        "alexa",
+        "diffuser",
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "tower-62-1701", buildingId: "tower-62", number: "1701",
+      overview: "High-rise apartment at 60-62 Twin Towers, Belajet Roundabout, with panoramic sea views and a dedicated lounge area.",
+      airbnb: "https://www.airbnb.com/rooms/1357942836336476023",
+      quickFacts: [
+        "Exclusive use of the apartment"
+      ],
+      checkIn: "Smart-lock self check-in with a unique code sent before arrival",
+      tv: { livingRoom: "98-inch Samsung TV", bedroom: "65-inch TV" },
+      entertainment: [
+        "Samsung Dolby Atmos sound system",
+        "Sonos Move 2 portable speaker",
+        "PS5 with two controllers and games",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Philips 5500-series automatic espresso machine — over 20 café-style drinks, no capsules",
+        "Unlimited mineral water and soft drinks"
+      ],
+      bedroomBathroomLaundry: [
+        "Dyson hair dryer set",
+        "Dr. Vranjes oil diffusers"
+      ],
+      lightingComfort: [
+        "Philips Hue lighting",
+        "High-speed 5G Wi-Fi",
+        "Smart AC thermostat",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Swimming pool",
+        "Elevator",
+        "Free parking",
+        "24/7 security and concierge"
+      ],
+      servicesIncluded: [
+        "Complimentary airport transfers, laundry and daily housekeeping",
+        "24/7 guest support — replies advertised within 60 seconds",
+        "Local on-call assistance and a pre-arrival inspection"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "espresso",
+        "pool",
+        "concierge",
+        "air-purifier",
+        "diffuser"
+      ]
+    },
+    {
+      id: "tower-62-1702", buildingId: "tower-62", number: "1702",
+      overview: "One-bedroom sea-view apartment with panoramic Gulf and Salmiya skyline views, smart lighting and PS5.",
+      airbnb: "https://www.airbnb.com/rooms/1358867776194046571",
+      quickFacts: [
+        "Full apartment access",
+        "Queen bed with Hungarian goose-down duvet"
+      ],
+      checkIn: "Smart lock with a unique code sent before check-in",
+      tv: { livingRoom: "85-inch Samsung QLED 4K TV", bedroom: "65-inch TV" },
+      entertainment: [
+        "Samsung Dolby Atmos 9.2.1 soundbar",
+        "Sonos Move 2 portable speaker",
+        "PS5 with two controllers",
+        "Netflix, Prime, Disney+, Shahid VIP, TOD and YouTube Premium",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Nespresso machine with complimentary capsules",
+        "Fully stocked kitchen with modern appliances, cookware and dinnerware"
+      ],
+      bedroomBathroomLaundry: [
+        "Queen bed with Hungarian goose-down duvet and premium linens",
+        "Sectional sofa"
+      ],
+      lightingComfort: [
+        "Philips Hue lighting",
+        "Central AC",
+        "5G Wi-Fi",
+        "Smart-home controls",
+        "Floor-to-ceiling windows",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Shared swimming pool access",
+        "24/7 security",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Smoking permitted by the window with ventilation",
+        "Keep noise low after 10 PM",
+        "Early check-in/late checkout can be requested but are not guaranteed",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "sea-view",
+        "ps5",
+        "atmos",
+        "hue",
+        "sonos",
+        "pool",
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+
+    /* ================= SALEENA RESIDENCE ================= */
+    {
+      id: "saleena-13", buildingId: "saleena", number: "13",
+      overview: "Fifth-floor one-bedroom apartment with a 100-inch cinema TV and premium sound systems.",
+      airbnb: "https://www.airbnb.com/rooms/739847616406804657",
+      quickFacts: [
+        "Entire one-bedroom apartment, 5th floor"
+      ],
+      checkIn: "Self check-in/out",
+      tv: { livingRoom: "100-inch QLED TV", bedroom: "65-inch 4K UHD Smart TV (master bedroom)" },
+      entertainment: [
+        "PS5 gaming console",
+        "Sony HT-A9 Dolby Atmos speakers",
+        "Bowers & Wilkins Formation Duo speakers",
+        "Apple TV and Google TV",
+        "Netflix, Disney+, OSN, Prime, Starzplay, SonyLIV, ZeeTV and TOD — beIN Sports included"
+      ],
+      kitchenCoffee: [
+        "Fully stocked kitchen",
+        "Nespresso machine",
+        "Complimentary tea, coffee, soft drinks and juice"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality bedding and cozy lighting",
+        "Dental kits, Pantene shampoo, Lifebuoy body wash, Nivea lotion",
+        "Fresh towels and hair dryer"
+      ],
+      lightingComfort: [
+        "Philips Hue lighting",
+        "High-speed 5G internet",
+        "Furnished living room with a fragrance scent",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Early check-in or late checkout depends on availability and requires advance discussion",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "ps5",
+        "atmos",
+        "hue",
+        "nespresso",
+        "sony",
+        "bowers-wilkins"
+      ]
+    },
+    {
+      id: "saleena-19", buildingId: "saleena", number: "19",
+      overview: "Modern, fully furnished apartment built around a private home-cinema experience.",
+      airbnb: "https://www.airbnb.com/rooms/1538130705379220133",
+      quickFacts: [],
+      tv: { livingRoom: "98-inch Samsung 4K UHD TV", bedroom: "65-inch TV" },
+      entertainment: [
+        "Samsung Q990DF Dolby Atmos sound system with surround sound",
+        "PS5 game console",
+        "beIN Sports viewing included",
+        "Movie nights and PS5 gaming available"
+      ],
+      kitchenCoffee: [
+        "Fully equipped kitchen: rice cooker, microwave, refrigerator, kettle, toaster, cookware and utensils",
+        "Rice, eggs, cooking oil, spices and seasonings",
+        "Stocked fridge: Aquafina water, soft drinks, fresh juice and snacks",
+        "Nespresso machine with three capsule varieties, tea and popcorn"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality bedding and cozy lighting",
+        "Dental kits, Pantene shampoo, Lifebuoy body wash, Nivea lotion",
+        "Fresh towels and hair dryer"
+      ],
+      lightingComfort: [
+        "Philips Hue adjustable mood lighting",
+        "Dr. Vranjes fragrance diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "atmos",
+        "hue",
+        "ps5",
+        "diffuser"
+      ]
+    },
+    {
+      id: "saleena-22", buildingId: "saleena", number: "22",
+      overview: "Apartment with a dedicated 100-inch home theater, additional living-room and bedroom TVs, and PS5.",
+      airbnb: "https://www.airbnb.com/rooms/1060211293800690821",
+      quickFacts: [],
+      checkIn: "Smart electronic number lock, self check-in/out",
+      tv: { livingRoom: "75-inch Mini LED TV (living room) — plus a 100-inch QLED home theater", bedroom: "65-inch 4K QLED TV (master bedroom)" },
+      entertainment: [
+        "100-inch QLED home theater with Dolby Atmos sound",
+        "Samsung Q990D flagship soundbar (bedroom) with Dolby Atmos",
+        "PS5 — FIFA24, Call of Duty, Fortnite, Spider-Man",
+        "beIN Sports viewing included"
+      ],
+      kitchenCoffee: [
+        "Fully equipped kitchen: rice cooker, microwave, refrigerator, kettle, toaster, cookware and utensils",
+        "Rice, eggs, cooking oil, spices and seasonings",
+        "Stocked fridge: Aquafina water, soft drinks, fresh juice and snacks",
+        "Nespresso machine with three capsule varieties, tea and popcorn"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality bedding and cozy lighting",
+        "Dental kits, Pantene shampoo, Lifebuoy body wash, Nivea lotion",
+        "Fresh towels and hair dryer"
+      ],
+      lightingComfort: [
+        "Portable 5G hotspot Wi-Fi",
+        "Zain Black Edition fixed router — unlimited high-speed internet",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Early check-in and late checkout are subject to availability",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "atmos",
+        "ps5"
+      ]
+    },
+    {
+      id: "saleena-25", buildingId: "saleena", number: "25",
+      overview: "Apartment with a dedicated cinema area plus a separate spacious living room.",
+      airbnb: "https://www.airbnb.com/rooms/1309272920177353819",
+      quickFacts: [],
+      tv: { livingRoom: "65-inch Samsung 4K Smart TV (living room) — plus a 100-inch QLED 4K, 144Hz cinema TV", bedroom: "65-inch TV" },
+      entertainment: [
+        "Samsung flagship Dolby Atmos sound system (cinema area)",
+        "PS5 with games",
+        "beIN 4K sports receiver",
+        "Netflix, OSN, Shahid VIP, Disney+ and Prime",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Fully equipped kitchen: rice cooker, microwave, refrigerator, kettle, toaster, cookware and utensils",
+        "Rice, eggs, cooking oil, spices and seasonings",
+        "Stocked fridge: Aquafina water, soft drinks, fresh juice and snacks",
+        "Nespresso machine with three capsule varieties, tea and popcorn"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality bedding and cozy lighting",
+        "Dental kits, Pantene shampoo, Lifebuoy body wash, Nivea lotion",
+        "Fresh towels and hair dryer"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "Modern L-shaped sofa, four-seat dining table, plush couch with USB charging ports",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "atmos",
+        "ps5",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "saleena-27", buildingId: "saleena", number: "27",
+      overview: "Entire private apartment with a black-themed cinema room, a 98-inch TV and a coffee table with a built-in refrigerator.",
+      airbnb: "https://www.airbnb.com/rooms/1173883231373459448",
+      quickFacts: [
+        "Complete apartment privacy"
+      ],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "98-inch Samsung Neo QLED TV", bedroom: "65-inch Samsung QLED Smart TV with streaming apps" },
+      entertainment: [
+        "Samsung Q990F Dolby Atmos surround sound",
+        "PS5 with two wireless controllers and games",
+        "Netflix, Prime Video, Disney+, Shahid VIP, OSN+, YouTube Premium and beIN Sports Ultimate 4K",
+        "Cloud sofa/lounge chaise for long movie sessions",
+        "Timber smart coffee table with built-in fridge",
+        "Dyson air purifier"
+      ],
+      kitchenCoffee: [
+        "Fully equipped kitchen: rice cooker, microwave, refrigerator, kettle, toaster, cookware and utensils",
+        "Rice, eggs, cooking oil, spices and seasonings",
+        "Stocked fridge: Aquafina water, soft drinks, fresh juice and snacks",
+        "Nespresso machine with three capsule varieties, tea and popcorn"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality bedding and cozy lighting",
+        "Dental kits, Pantene shampoo, Lifebuoy body wash, Nivea lotion",
+        "Fresh towels and hair dryer"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Dr. Vranjes fragrance diffuser",
+        "High-speed Wi-Fi",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "atmos",
+        "hue",
+        "ps5",
+        "nespresso",
+        "air-purifier",
+        "diffuser"
+      ]
+    },
+
+    /* ================= R & A APARTMENTS ================= */
+    {
+      id: "ra-13", buildingId: "ra", number: "13",
+      overview: "“Happy Nest” apartment with PS5, smart lighting and a stocked kitchen. Owner-confirmed apartment name: RA 13.",
+      airbnb: "https://www.airbnb.com/rooms/48216842",
+      quickFacts: [
+        "Entire apartment",
+        "Ground-floor gym in building"
+      ],
+      checkIn: "Self check-in by electronic keypad, with code sent before stay",
+      tv: { livingRoom: "65-inch Samsung QLED 4K TV (Android TV with Chromecast)", bedroom: "50-inch TV" },
+      entertainment: [
+        "PS5 with games",
+        "TV soundbar can also connect to a phone",
+        "beIN Ultimate package",
+        "Netflix, Amazon Prime, OSN, Simply South, YouTube and Spotify"
+      ],
+      kitchenCoffee: [
+        "Microwave, air fryer, toaster, electric cooker, fridge and gas stove",
+        "Dishes, glasses, cutlery, oil, spices, salt, sugar, rice, onion, tomato, chili, garlic and lemon",
+        "Complimentary self-prepared breakfast supplies: bread, jam, honey, Nutella, cereals, fruit juice, tea, coffee, milk and eggs",
+        "Minibar drinks and snacks are complimentary"
+      ],
+      bedroomBathroomLaundry: [
+        "Toothbrush/paste, soap, shampoo, shower gel, conditioner and lotion",
+        "Bath, face and hand towels",
+        "Extra pillows, blanket, fitted sheet and duvet cover in wardrobe drawer",
+        "Hair dryer and steam iron in bedroom cabinet",
+        "Washer with dryer — detergent gel, whitener and softener under kitchen-sink rack"
+      ],
+      lightingComfort: [
+        "Philips ambient lighting",
+        "5G Wi-Fi",
+        "Air purifier in living room",
+        "Wireless charging station",
+        "Body-weight scale",
+        "Xiaomi Mi smart table lamp",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Ground-floor gym",
+        "Common reception seating",
+        "Free unreserved parking (first-come, first-served)",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "A Civil ID, passport or driving-license copy is requested through WhatsApp",
+        "No spy cameras — guest privacy is stated as protected",
+        "Avoid indoor smoking — this apartment has no balcony, so please smoke outside the building only",
+        "Contact host in advance if more than two friends visit at night",
+        "No space is guaranteed for parking; a guest may be asked to leave a key with the caretaker if blocking a route",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "ps5",
+        "hue",
+        "air-purifier",
+        "gym"
+      ]
+    },
+    {
+      id: "ra-47", buildingId: "ra", number: "47",
+      overview: "Fully furnished private apartment in Salmiya with smart colour lighting, two TVs and wireless phone charging.",
+      airbnb: "https://www.airbnb.com/rooms/51505377",
+      quickFacts: [
+        "Entire apartment"
+      ],
+      checkIn: "Self check-in with an electronic lock",
+      tv: { livingRoom: "55-inch Smart TV with Bluetooth soundbar", bedroom: "50-inch TV" },
+      entertainment: [
+        "Netflix, OSN, Prime, ZeeTV and Disney+"
+      ],
+      kitchenCoffee: [
+        "Microwave, air fryer, toaster, electric cooker, fridge and gas stove",
+        "Dishes, glasses, cutlery, oil, spices, salt, sugar, rice, onion, tomato, chili, garlic and lemon",
+        "Complimentary self-prepared breakfast supplies: bread, jam, honey, Nutella, cereals, fruit juice, tea, coffee, milk and eggs",
+        "Minibar drinks and snacks are complimentary"
+      ],
+      bedroomBathroomLaundry: [
+        "Toothbrush/paste, soap, shampoo, shower gel, conditioner and lotion",
+        "Bath, face and hand towels",
+        "Extra pillows, blanket, fitted sheet and duvet cover in wardrobe drawer",
+        "Hair dryer and steam iron in bedroom cabinet",
+        "Washer with dryer — detergent gel, whitener and softener under kitchen-sink rack"
+      ],
+      lightingComfort: [
+        "Philips Hue colour lighting, controlled through a mobile app",
+        "High-speed 5G Wi-Fi",
+        "Cable-free mobile chargers",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [
+        "Espresso machine make/model is not specified."
+      ],
+      tags: [
+        "hue",
+        "diffuser"
+      ]
+    },
+    {
+      id: "ra-48", buildingId: "ra", number: "48",
+      overview: "Also known as Muji 48 — owner-confirmed name is RA 48. Minimalist one-bedroom apartment near Sharamman roundabout, with a queen bed, two 65-inch TVs and PS5.",
+      airbnb: "https://www.airbnb.com/rooms/1189957363634086688",
+      quickFacts: [
+        "Max 2 guests",
+        "Pets not allowed",
+        "Entire apartment"
+      ],
+      checkIn: "Smart-lock self check-in — check-in after 2 PM, checkout before noon",
+      tv: { livingRoom: "65-inch Samsung QLED TV with Samsung Q-Symphony soundbar", bedroom: "65-inch LG NanoCell TV" },
+      entertainment: [
+        "PS5 Slim Disc — Spider-Man: Miles Morales, EA Sports FC24, God of War Ragnarok, Gran Turismo 7, Call of Duty Modern Warfare 3",
+        "Netflix, Amazon Prime, Disney+, OSN Plus, Shahid TV, YouTube Premium and TOD"
+      ],
+      kitchenCoffee: [
+        "Stove, mini-fridge, microwave, blender, toaster, kettle, cookware, dishes and cutlery",
+        "Nespresso machine with capsules",
+        "Tea, coffee, spices, oil, cold drinks, juice, water and milk"
+      ],
+      bedroomBathroomLaundry: [
+        "Queen bed, premium mattress/pillows, extra sheets and cotton linens, Hungarian goose-down duvet",
+        "Samsung WindFree bedroom AC",
+        "Standalone shower, vanity, toilet, hot water, towels, shampoo, conditioner, shower gel and hair dryer",
+        "Washer with detergent gel, iron and hangers"
+      ],
+      lightingComfort: [
+        "High-speed 5G Wi-Fi",
+        "Dr. Vranjes diffuser",
+        "Sofa, dining corner, full-length window with blinds",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Private parking",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "ps5",
+        "q-symphony",
+        "nespresso",
+        "diffuser"
+      ]
+    },
+
+    /* ================= JASSEM APARTMENTS ================= */
+    {
+      id: "jassem-27", buildingId: "jassem", number: "27",
+      overview: "Private two-bedroom apartment on Amman Street, Salmiya, with smart lighting and two TVs; no shared apartment spaces.",
+      airbnb: "https://www.airbnb.com/rooms/1292828308872031091",
+      quickFacts: [
+        "Entire apartment, no shared spaces"
+      ],
+      checkIn: "Smart-lock self check-in/out, with instructions sent before arrival",
+      tv: { livingRoom: "65-inch Samsung 4K TV", bedroom: "55-inch Philips 4K Smart TV" },
+      entertainment: [
+        "Netflix, YouTube Premium, Amazon, Shahid VIP, Disney+ and OSN"
+      ],
+      kitchenCoffee: [
+        "Electric hotplate, cookware, oil, salt, pepper and refrigerator",
+        "Water, coffee, tea, juice and soft drinks"
+      ],
+      bedroomBathroomLaundry: [
+        "Queen-bed setup with hotel-comfort mattress and cotton sheets",
+        "Nimbus duvet: 90% Hungarian goose down, 10% feather, 300-thread-count cotton sateen cover",
+        "Towels, toothbrush/paste, soap, body lotion, conditioner and shampoo",
+        "Washer with detergent gel, hair dryer, iron and ironing pad, drying stand"
+      ],
+      lightingComfort: [
+        "Philips Hue lights, controlled by mobile app",
+        "High-speed 5G Wi-Fi",
+        "Oil heaters",
+        "Dr. Vranjes fragrance diffuser",
+        "Prayer mat",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Professional cleaning before arrival"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Keep noise low after 10 PM",
+        "Smoking only in the living room with the window fully open; no bedroom smoking",
+        "Complimentary extra cleaning for longer stays can be arranged on request (availability not guaranteed)",
+        "Arabic restaurants and cafes are within walking distance",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [
+        "Room-by-room bed details are noted as N/A by the owner."
+      ],
+      tags: [
+        "hue",
+        "diffuser"
+      ]
+    },
+    {
+      id: "jassem-28", buildingId: "jassem", number: "28",
+      overview: "Two-bedroom apartment for up to four guests.",
+      airbnb: "https://www.airbnb.com/rooms/1537170801852305486",
+      quickFacts: [
+        "Up to 4 guests",
+        "Master bedroom + second bedroom with two beds"
+      ],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "85-inch Samsung QLED TV", bedroom: "55-inch TV (brand/model not provided)" },
+      entertainment: [],
+      kitchenCoffee: [],
+      bedroomBathroomLaundry: [
+        "Master bedroom: one queen bed",
+        "Second bedroom: two single beds",
+        "Living room: one couch",
+        ""
+      ],
+      lightingComfort: [
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free parking (highlighted on the listing)",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [
+        "Other equipment details for this apartment have not been provided."
+      ],
+      tags: []
+    },
+
+    /* ================= FATEMA APARTMENTS ================= */
+    {
+      id: "fatema-34a", buildingId: "fatema", number: "34A",
+      overview: "Compact, fully stocked one-bedroom apartment in Salmiya Block 2, near AUK University. Shares a common main door with Apartment 34B.",
+      airbnb: "https://www.airbnb.com/rooms/1571158224029875721",
+      quickFacts: [
+        "Entire apartment, elevator, hallway and basement access"
+      ],
+      checkIn: "Smart-lock self check-in/out",
+      tv: { livingRoom: "75-inch Samsung QLED 4K TV", bedroom: "60-inch Samsung Smart TV" },
+      entertainment: [
+        "Netflix, Prime Video, Shahid VIP, Disney+, TOD 4K, OSN and YouTube Premium (living room)",
+        "Netflix and YouTube Premium (bedroom)"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "Philips Hue smart lighting",
+        "High-speed 5G Wi-Fi",
+        "Three-seat sofa with chaise and throw blanket",
+        "Central AC, oil heater for winter",
+        "Prayer mat",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free entrance/basement parking (suits small cars only)",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Common main door leads to private apartments A and B — shared wall can carry household sounds",
+        "No parties or loud music; keep TV/conversation moderate at night",
+        "Smoking prohibited inside, with an exception by the fully open living-room window",
+        "Near cafes, restaurants and daily essentials; Avenues Mall about 20 minutes in normal traffic",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "hue",
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "fatema-34b", buildingId: "fatema", number: "34B",
+      overview: "Modern one-bedroom apartment in central Salmiya, with two 65-inch TVs and 5G internet. Shares a common main door with Apartment 34A.",
+      airbnb: "https://www.airbnb.com/rooms/1571198762750888977",
+      quickFacts: [
+        "Entire apartment",
+        "Max 2 guests"
+      ],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "65-inch Samsung 4K UHD TV", bedroom: "65-inch Samsung Smart TV" },
+      entertainment: [
+        "Netflix, Prime Video, Shahid VIP, Disney+, TOD 4K, OSN and YouTube Premium (living room)",
+        "Netflix and YouTube Premium (bedroom)"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "Philips Hue smart lighting",
+        "High-speed 5G Wi-Fi",
+        "Three-seat sofa with chaise and throw blanket",
+        "Central AC, oil heater for winter",
+        "Prayer mat",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Basement parking",
+        "Elevator",
+        "Hallways"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Shared main entrance leads to private apartments A and B, each with its own private entrance",
+        "Shared wall — keep TV/conversation volume moderate, especially late at night",
+        "Smoking not permitted indoors except in the living room with the window fully open",
+        "Digital guest ID requested before check-in details are shared",
+        "Maximum two guests; a third guest is not allowed; only registered guests may stay overnight",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "air-purifier"
+      ]
+    },
+    {
+      id: "fatema-35a", buildingId: "fatema", number: "35A",
+      overview: "Small, fully stocked one-bedroom apartment in Salmiya Block 2, near AUK University. Shares a common main door with Apartment 35B.",
+      airbnb: "https://www.airbnb.com/rooms/1569592928622448071",
+      quickFacts: [
+        "Entire apartment, elevator and hallway access"
+      ],
+      checkIn: "Smart-lock self check-in/out",
+      tv: { livingRoom: "75-inch Samsung QLED 4K TV", bedroom: "60-inch Samsung Smart TV" },
+      entertainment: [
+        "Netflix, Prime Video, Shahid VIP, Disney+, TOD 4K, OSN and YouTube Premium (living room)",
+        "Netflix and YouTube Premium (bedroom)"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juice, soft drinks, cornflakes and Aquafina water"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, wardrobe/hangers",
+        "Premium towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Slippers, kitchen towels and face tissues"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "5G Wi-Fi",
+        "Three-seat sofa with chaise, throw blanket",
+        "Oil heater",
+        "Prayer mat",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free entrance and basement parking (suits small cars only)",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Common main door leads to private apartments A and B — shared wall can carry household sounds",
+        "No parties or loud music; keep TV/conversation moderate at night",
+        "Smoking prohibited inside, with an exception near the fully open living-room window",
+        "Near cafes, restaurants and daily essentials; Avenues Mall about 20 minutes in normal traffic",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "air-purifier",
+        "nespresso"
+      ]
+    },
+    {
+      id: "fatema-35b", buildingId: "fatema", number: "35B",
+      overview: "Compact, modern one-bedroom apartment in central Salmiya, with two TVs and 5G internet. Shares a common main door with Apartment 35A.",
+      airbnb: "https://www.airbnb.com/rooms/1574545332825326900",
+      quickFacts: [
+        "Entire apartment access"
+      ],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "75-inch Samsung 4K UHD TV", bedroom: "60-inch Samsung Smart TV" },
+      entertainment: [
+        "Netflix, Prime Video, Shahid VIP, Disney+, TOD 4K, OSN and YouTube Premium (living room)",
+        "Netflix and YouTube Premium (bedroom)"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "Philips Hue smart lighting",
+        "High-speed 5G Wi-Fi",
+        "Three-seat sofa with chaise and throw blanket",
+        "Central AC, oil heater for winter",
+        "Prayer mat",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Basement parking",
+        "Elevator",
+        "Hallways"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "A common main door leads to two separate private apartments, A and B, each with its own private entrance",
+        "Compact apartment sharing a wall with the next apartment — keep TV/conversation volume moderate, especially late at night",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "air-purifier"
+      ]
+    },
+    {
+      id: "fatema-36a", buildingId: "fatema", number: "36A",
+      overview: "Compact modern one-bedroom apartment in central Salmiya with two TVs and 5G Wi-Fi. Shares a common main door with Apartment 36B.",
+      airbnb: "https://www.airbnb.com/rooms/1570480354867627085",
+      quickFacts: [
+        "Entire apartment access"
+      ],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "75-inch Samsung 4K UHD TV", bedroom: "60-inch Samsung Smart TV" },
+      entertainment: [
+        "Netflix, Prime Video, Shahid VIP, Disney+, TOD 4K, OSN and YouTube Premium (living room)",
+        "Netflix and YouTube Premium (bedroom)"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "Philips Hue smart lighting",
+        "High-speed 5G Wi-Fi",
+        "Three-seat sofa with chaise and throw blanket",
+        "Central AC, oil heater for winter",
+        "Prayer mat",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Basement parking",
+        "Elevator",
+        "Hallways"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "A common main door leads to two separate private apartments, A and B, each with its own private entrance",
+        "Compact apartment sharing a wall with the next apartment — keep TV/conversation volume moderate, especially late at night",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "air-purifier"
+      ]
+    },
+    {
+      id: "fatema-36b", buildingId: "fatema", number: "36B",
+      overview: "Compact, fully stocked one-bedroom apartment in Salmiya Block 2, with a 160 x 200 cm queen bed. Shares a common main door with Apartment 36A.",
+      airbnb: "https://www.airbnb.com/rooms/1571512295702377337",
+      quickFacts: [
+        "Queen bed 160 x 200 cm",
+        "Free entrance and basement parking"
+      ],
+      checkIn: "Smart-lock self check-in/out",
+      tv: { livingRoom: "75-inch Samsung QLED 4K TV", bedroom: "60-inch Samsung Smart TV" },
+      entertainment: [
+        "Netflix, Prime Video, Shahid VIP, Disney+, TOD 4K, OSN and YouTube Premium (living room)",
+        "Netflix and YouTube Premium (bedroom)"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juice, soft drinks, cornflakes and Aquafina water"
+      ],
+      bedroomBathroomLaundry: [
+        "Queen bed (160 x 200 cm), hotel-quality mattress, goose-down duvet, wardrobe/hangers",
+        "Premium towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "High-speed 5G Wi-Fi",
+        "Three-seat sofa with chaise, throw blanket",
+        "Oil heater",
+        "Prayer mat",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free entrance and basement parking (suits small cars only)",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Common main door leads to private apartments A and B — shared wall can carry household sounds",
+        "No parties or loud music; keep TV/conversation moderate at night",
+        "No indoor smoking, with an exception by the fully open living-room window",
+        "Near AUK University, cafes, restaurants and daily essentials; Avenues Mall about 20 minutes in normal traffic",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "air-purifier",
+        "nespresso"
+      ]
+    },
+
+    /* ================= FATEMA APARTMENTS (PREMIUM) ================= */
+    {
+      id: "fatema-premium-7a", buildingId: "fatema-premium", number: "7A",
+      overview: "Compact, thoughtfully designed one-bedroom apartment for couples, solo travelers or business guests. Shares a main entrance with Apartment 7B.",
+      airbnb: "https://www.airbnb.com/rooms/1732363601308692633",
+      quickFacts: [
+        "Max 2 guests"
+      ],
+      tv: { livingRoom: "87-inch Samsung QLED Smart TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Netflix, Disney+, Prime Video, OSN+, Shahid, STARZPLAY, beIN Sports and YouTube Premium"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Shared main entrance leads to two private apartments, A and B, each with its own private entrance",
+        "Shared wall — keep TV/conversation volume moderate, especially late at night",
+        "Smoking not permitted indoors except in the living room with the window fully open",
+        "Digital guest ID requested before check-in details are shared",
+        "Maximum two guests; a third guest is not permitted; only registered guests may stay overnight",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "air-purifier"
+      ]
+    },
+    {
+      id: "fatema-premium-7b", buildingId: "fatema-premium", number: "7B",
+      overview: "Compact new one-bedroom apartment for one or two guests, with a bedroom Smart TV and equipped kitchenette.",
+      airbnb: "https://www.airbnb.com/rooms/1727696936346238503",
+      quickFacts: [
+        "Max 2 guests"
+      ],
+      checkIn: "Self check-in",
+      tv: { livingRoom: "87-inch Samsung QLED TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Netflix, Disney+, Prime Video, OSN+, Shahid, STARZPLAY, beIN Sports and YouTube Premium"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "High-speed Wi-Fi",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Professional cleaning before every stay"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Common main entrance leads to private apartments A and B — shared wall, keep noise moderate at night",
+        "Smoking permitted in the living room only, with the window fully open",
+        "Digital guest ID requested before check-in details are shared",
+        "Registered guests only overnight; no third guest",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "fatema-premium-8a", buildingId: "fatema-premium", number: "8A",
+      overview: "Compact one-bedroom apartment with Japandi interiors. Owner confirmed the same equipment and supplies as Premium 7B.",
+      airbnb: "https://www.airbnb.com/rooms/1732761614778088830",
+      quickFacts: [
+        "Free parking highlighted on the listing"
+      ],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "87-inch Samsung QLED TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Netflix, Disney+, Prime Video, OSN+, Shahid, STARZPLAY, beIN Sports and YouTube Premium"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "High-speed Wi-Fi",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free parking",
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Professional cleaning before every stay"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "fatema-premium-8b", buildingId: "fatema-premium", number: "8B",
+      overview: "Compact one-bedroom apartment in central Salmiya for one or two guests, with a kitchenette and washing machine.",
+      airbnb: "https://www.airbnb.com/rooms/1727779771928712194",
+      quickFacts: [
+        "Max 2 guests",
+        "Cozy living area"
+      ],
+      checkIn: "Self check-in",
+      tv: { livingRoom: "87-inch Samsung QLED TV", bedroom: "65-inch Smart TV — Netflix mentioned" },
+      entertainment: [
+        "Netflix, Disney+, Prime Video, OSN+, Shahid, STARZPLAY, beIN Sports and YouTube Premium"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "High-speed Wi-Fi",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "Professional cleaning before each stay"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "nespresso",
+        "air-purifier"
+      ]
+    },
+    {
+      id: "fatema-premium-9a", buildingId: "fatema-premium", number: "9A",
+      overview: "New one-bedroom apartment in central Salmiya with two TVs, a stocked kitchen and personal-care supplies. Shares a main entrance with Apartment 9B.",
+      airbnb: "https://www.airbnb.com/rooms/1735643216436165786",
+      quickFacts: [
+        "Max 2 guests"
+      ],
+      checkIn: "Smart self check-in",
+      tv: { livingRoom: "87-inch Samsung QLED Smart TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Netflix, Disney+, Prime Video, OSN+, Shahid, STARZPLAY, beIN Sports and YouTube Premium"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "Dr. Vranjes fragrance diffuser",
+        "Fast Wi-Fi",
+        "Comfortable sofa/seating",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "24/7 support with advertised replies within one minute"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Common main entrance leads to private apartments A and B — shared wall, keep noise moderate at night",
+        "Smoking permitted in the living room only, with the window fully open",
+        "Guest digital ID requested before check-in details are shared",
+        "Only registered guests stay overnight; max two visitors, no third guest permitted",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "nespresso",
+        "air-purifier",
+        "diffuser"
+      ]
+    },
+    {
+      id: "fatema-premium-9b", buildingId: "fatema-premium", number: "9B",
+      overview: "New one-bedroom apartment in central Salmiya with two TVs, a stocked kitchen and personal-care supplies. Shares a main entrance with Apartment 9A.",
+      airbnb: "https://www.airbnb.com/rooms/1732052851084859949",
+      quickFacts: [
+        "Max 2 guests"
+      ],
+      checkIn: "Smart self check-in",
+      tv: { livingRoom: "87-inch Samsung QLED Smart TV", bedroom: "65-inch Smart TV" },
+      entertainment: [
+        "Netflix, Disney+, Prime Video, OSN+, Shahid, STARZPLAY, beIN Sports and YouTube Premium"
+      ],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips air purifier",
+        "Dr. Vranjes fragrance diffuser",
+        "Fast Wi-Fi",
+        "Comfortable sofa/seating",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Elevator access"
+      ],
+      servicesIncluded: [
+        "24/7 support with advertised replies within one minute"
+      ],
+      serviceExceptions: [],
+      guestNotes: [
+        "Common main entrance leads to private apartments A and B — shared wall, keep noise moderate at night",
+        "Smoking permitted in the living room only, with the window fully open",
+        "Guest digital ID requested before check-in details are shared",
+        "Only registered guests stay overnight; max two visitors, no third guest permitted",
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "nespresso",
+        "air-purifier",
+        "diffuser"
+      ]
+    },
+
+    /* ================= DANA RESIDENCE ================= */
+    {
+      id: "dana-11", buildingId: "dana", number: "11",
+      overview: "Owner confirmed that Dana 11, 12, 17 and 18 share the same features and amenities.",
+      airbnb: "https://www.airbnb.com/rooms/1726621996590521740",
+      quickFacts: [],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "85-inch TV", bedroom: "65-inch TV" },
+      entertainment: [],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Bedroom: king-size bed",
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free parking",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "hue"
+      ]
+    },
+    {
+      id: "dana-12", buildingId: "dana", number: "12",
+      overview: "Owner confirmed that Dana 11, 12, 17 and 18 share the same features and amenities.",
+      airbnb: "https://www.airbnb.com/rooms/1726114419174600850",
+      quickFacts: [],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "85-inch TV", bedroom: "65-inch TV" },
+      entertainment: [],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Bedroom: king-size bed",
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free parking",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "hue"
+      ]
+    },
+    {
+      id: "dana-17", buildingId: "dana", number: "17",
+      overview: "Owner confirmed that Dana 11, 12, 17 and 18 share the same features and amenities.",
+      airbnb: "https://www.airbnb.com/rooms/1725971698762435320",
+      quickFacts: [],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "85-inch TV", bedroom: "65-inch TV" },
+      entertainment: [],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Bedroom: king-size bed",
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free parking",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "hue"
+      ]
+    },
+    {
+      id: "dana-18", buildingId: "dana", number: "18",
+      overview: "Owner confirmed that Dana 11, 12, 17 and 18 share the same features and amenities.",
+      airbnb: "https://www.airbnb.com/rooms/1724413984345643235",
+      quickFacts: [],
+      checkIn: "Smart-lock self check-in",
+      tv: { livingRoom: "85-inch TV", bedroom: "65-inch TV" },
+      entertainment: [],
+      kitchenCoffee: [
+        "Refrigerator, microwave, auto-ignition gas stove, pans, cutlery, rice cooker, egg boiler, toaster and kettle",
+        "Nespresso machine with three capsule varieties",
+        "Salt, pepper, sunflower oil, chili powder, eggs, bread, tea, coffee, Nescafe 3-in-1, milk, juices, soft drinks and cornflakes"
+      ],
+      bedroomBathroomLaundry: [
+        "Bedroom: king-size bed",
+        "Hotel-quality mattress and goose-down duvet, small wardrobe/hangers",
+        "Fresh hotel-quality towels, Pantene shampoo, Lifebuoy body wash, Nivea lotion, toothbrush and toothpaste",
+        "Washer with built-in dryer, drying rack, steam iron, ironing board on request, hair dryer",
+        "Kitchen towels, face tissues and slippers"
+      ],
+      lightingComfort: [
+        "Philips Hue ambient lighting",
+        "Dr. Vranjes oil diffuser",
+        "Porodo 10,000mAh 4-in-1 power bank station with Lightning and Type-C integrated cables"
+      ],
+      buildingFacilities: [
+        "Free parking",
+        "Elevator access"
+      ],
+      servicesIncluded: [],
+      serviceExceptions: [],
+      guestNotes: [
+        "Quiet hours 10 PM–7 AM",
+        "Digital ID requested after reservation",
+        "Travel-time estimates: Avenues Mall 13 min, 360 Mall 15 min, Al Seef Hospital 6 min, Boulevard Park 7 min, Al Fanar Mall 10 min, airport 18 min (estimates)"
+      ],
+      gaps: [],
+      tags: [
+        "hue"
+      ]
+    }
+  ]
+};
+
+</script>
+<script>
+/* ============================================================
+   Homes by Sujo — Co-Host Apartment Guide
+   PRESENTATION / BEHAVIOUR — reads from window.HBS_DATA (data.js).
+   No apartment facts are hard-coded here.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var DATA = window.HBS_DATA;
+  var APARTMENTS = DATA.apartments;
+  var BUILDINGS = DATA.buildings;
+  var GLOSSARY = DATA.glossary;
+
+  var BUILDING_BY_ID = {};
+  BUILDINGS.forEach(function (b) { BUILDING_BY_ID[b.id] = b; });
+  var APT_BY_ID = {};
+  APARTMENTS.forEach(function (a) { APT_BY_ID[a.id] = a; });
+
+  /* ---------------- storage helpers (guarded) ---------------- */
+  function storageGet(key, fallback) {
+    try {
+      var v = localStorage.getItem(key);
+      return v ? JSON.parse(v) : fallback;
+    } catch (e) { return fallback; }
+  }
+  function storageSet(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* ignore */ }
+  }
+  function sessionGet(key, fallback) {
+    try {
+      var v = sessionStorage.getItem(key);
+      return v ? JSON.parse(v) : fallback;
+    } catch (e) { return fallback; }
+  }
+  function sessionSet(key, val) {
+    try { sessionStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* ignore */ }
+  }
+
+  var favourites = storageGet("hbs_favourites", []);
+  var recents = storageGet("hbs_recents", []);
+  var compareList = storageGet("hbs_compare", []);
+
+  function saveFavourites() { storageSet("hbs_favourites", favourites); }
+  function saveRecents() { storageSet("hbs_recents", recents); }
+  function saveCompare() { storageSet("hbs_compare", compareList); }
+
+  function toggleFavourite(id) {
+    var i = favourites.indexOf(id);
+    if (i === -1) favourites.unshift(id); else favourites.splice(i, 1);
+    saveFavourites();
+  }
+  function isFavourite(id) { return favourites.indexOf(id) !== -1; }
+
+  function pushRecent(id) {
+    var i = recents.indexOf(id);
+    if (i !== -1) recents.splice(i, 1);
+    recents.unshift(id);
+    recents = recents.slice(0, 8);
+    saveRecents();
+  }
+
+  function toggleCompare(id) {
+    var i = compareList.indexOf(id);
+    if (i !== -1) { compareList.splice(i, 1); }
+    else {
+      if (compareList.length >= 3) compareList.shift();
+      compareList.push(id);
+    }
+    saveCompare();
+    renderCompareBar();
+  }
+  function isInCompare(id) { return compareList.indexOf(id) !== -1; }
+
+  /* ---------------- search index ---------------- */
+  var SYNONYM_TRIGGERS = [
+    { rx: /nespresso|espresso/i, add: ["coffee", "coffeemachine"] },
+    { rx: /ps5/i, add: ["playstation", "gaming", "console", "game"] },
+    { rx: /sonos/i, add: ["speaker", "music"] },
+    { rx: /philips hue/i, add: ["lighting", "mood", "ambient"] },
+    { rx: /vranjes/i, add: ["diffuser", "fragrance", "scent"] },
+    { rx: /air purifier/i, add: ["purifier", "airquality"] },
+    { rx: /\bpool\b/i, add: ["swimming"] },
+    { rx: /\bgym\b/i, add: ["fitness"] },
+    { rx: /dolby atmos|atmos/i, add: ["surroundsound", "cinema"] },
+    { rx: /q-symphony/i, add: ["qsymphony"] },
+    { rx: /balcony|terrace/i, add: ["outdoor"] },
+    { rx: /concierge|airport transfer/i, add: ["transfers"] }
+  ];
+
+  function tokenize(str) {
+    return (str.toLowerCase().match(/[a-z0-9]+/g) || []);
+  }
+
+  function buildSearchable(apt) {
+    var b = BUILDING_BY_ID[apt.buildingId];
+    // Identity text (building + number) is always trusted as this apartment's own.
+    var identityText = b.name + " " + apt.number;
+    // Content text can legitimately reference a *different* tower in a shared
+    // note (e.g. "confirmed for every Tower 60 and Tower 62 apartment") — strip
+    // those cross-references so a "60 1601" search can't cross-match 62's 1601.
+    var contentTextRaw = [
+      apt.overview,
+      (apt.quickFacts || []).join(" "),
+      apt.checkIn || "",
+      apt.tv ? (apt.tv.livingRoom || "") + " " + (apt.tv.bedroom || "") : "",
+      (apt.entertainment || []).join(" "),
+      (apt.kitchenCoffee || []).join(" "),
+      (apt.bedroomBathroomLaundry || []).join(" "),
+      (apt.lightingComfort || []).join(" "),
+      (apt.buildingFacilities || []).join(" "),
+      (apt.servicesIncluded || []).join(" "),
+      (apt.guestNotes || []).join(" ")
+    ].join(" ");
+    var contentText = contentTextRaw.replace(/tower\s*6[02]\b/gi, " ");
+
+    var positiveParts = identityText + " " + contentText;
+
+    // Amenity-only text for badges/filters: guest notes and service exceptions
+    // carry policy language (e.g. a smoking note mentioning "the balcony
+    // window", or a note that a service is NOT provided) that must not be
+    // read as confirming an actual apartment amenity.
+    var amenityTextRaw = [
+      apt.overview,
+      (apt.quickFacts || []).join(" "),
+      apt.tv ? (apt.tv.livingRoom || "") + " " + (apt.tv.bedroom || "") : "",
+      (apt.entertainment || []).join(" "),
+      (apt.kitchenCoffee || []).join(" "),
+      (apt.bedroomBathroomLaundry || []).join(" "),
+      (apt.lightingComfort || []).join(" "),
+      (apt.buildingFacilities || []).join(" "),
+      (apt.servicesIncluded || []).join(" ")
+    ].join(" ").replace(/tower\s*6[02]\b/gi, " ");
+    var amenityRaw = (identityText + " " + amenityTextRaw).toLowerCase();
+
+    // Airport taxi/transfer signal: only a guest-facing service actually
+    // included should count — not a building's own front-desk "concierge"
+    // staff (buildingFacilities) and not a note saying transfers are NOT
+    // provided (serviceExceptions).
+    var transferRaw = (identityText + " " + apt.overview + " " + (apt.servicesIncluded || []).join(" ")).toLowerCase();
+
+    var extra = [];
+    SYNONYM_TRIGGERS.forEach(function (s) {
+      if (s.rx.test(positiveParts)) extra = extra.concat(s.add);
+    });
+
+    var tokens = tokenize(positiveParts + " " + extra.join(" "));
+    return { tokens: tokens, tokenSet: new Set(tokens), raw: positiveParts.toLowerCase(), amenityRaw: amenityRaw, transferRaw: transferRaw };
+  }
+
+  APARTMENTS.forEach(function (apt) { apt._search = buildSearchable(apt); });
+
+  function matchesQuery(apt, query) {
+    var q = query.trim().toLowerCase();
+    if (!q) return true;
+    var qTokens = tokenize(q);
+    if (qTokens.length === 0) return true;
+    return qTokens.every(function (qt) {
+      for (var t of apt._search.tokenSet) {
+        if (t === qt || (qt.length >= 2 && t.indexOf(qt) === 0)) return true;
+      }
+      return false;
+    });
+  }
+
+  /* ---------------- filters ---------------- */
+  var FILTERS = [
+    { id: "ps5", label: "PS5 gaming", test: function (a) { return a._search.raw.indexOf("ps5") !== -1; } },
+    { id: "atmos", label: "Dolby Atmos sound", test: function (a) { return a._search.raw.indexOf("atmos") !== -1; } },
+    { id: "view", label: "Sea / city view", test: function (a) { return /\bsea\b/.test(a._search.raw) && /view/.test(a._search.raw); } },
+    { id: "balcony", label: "Balcony / terrace", test: function (a) { return /balcony|terrace/.test(a._search.amenityRaw); } },
+    { id: "pool", label: "Swimming pool", test: function (a) { return /\bpool\b/.test(a._search.raw); } },
+    { id: "gym", label: "Gym access", test: function (a) { return /\bgym\b/.test(a._search.raw); } },
+    { id: "parking", label: "Parking", test: function (a) { return /parking/.test(a._search.raw); } },
+    { id: "coffee", label: "Coffee machine", test: function (a) { return /nespresso|espresso/.test(a._search.raw); } },
+    { id: "purifier", label: "Air purifier", test: function (a) { return /air purifier/.test(a._search.raw); } },
+    { id: "diffuser", label: "Fragrance diffuser", test: function (a) { return /vranjes/.test(a._search.raw); } },
+    { id: "concierge", label: "Concierge / transfers", test: function (a) { return /taxi pickup|airport transfer/.test(a._search.transferRaw); } },
+    { id: "hue", label: "Smart mood lighting", test: function (a) { return /philips hue/.test(a._search.raw); } }
+  ];
+
+  /* ---------------- glossary matching ---------------- */
+  function findGlossaryMatch(text) {
+    var lower = text.toLowerCase();
+    for (var g of GLOSSARY) {
+      var matches = g.match || [g.term.toLowerCase()];
+      for (var m of matches) {
+        if (lower.indexOf(m) !== -1) return g;
+      }
+    }
+    return null;
+  }
+
+  /* ---------------- state ---------------- */
+  var state = {
+    view: "home",     // home | detail | compare
+    aptId: null,
+    query: "",
+    activeFilters: new Set()
+  };
+
+  function restoreHomeState() {
+    var saved = sessionGet("hbs_home_state", null);
+    if (saved) {
+      state.query = saved.query || "";
+      state.activeFilters = new Set(saved.filters || []);
+    }
+  }
+  function persistHomeState(scrollY) {
+    sessionSet("hbs_home_state", {
+      query: state.query,
+      filters: Array.from(state.activeFilters),
+      scrollY: typeof scrollY === "number" ? scrollY : window.scrollY
+    });
+  }
+
+  /* ---------------- routing ---------------- */
+  function parseHash() {
+    var h = window.location.hash.replace(/^#\/?/, "");
+    if (!h) return { view: "home" };
+    var parts = h.split("/");
+    if (parts[0] === "apt" && parts[1]) return { view: "detail", aptId: decodeURIComponent(parts[1]) };
+    if (parts[0] === "compare") return { view: "compare" };
+    return { view: "home" };
+  }
+
+  function navigate(hash) {
+    window.location.hash = hash;
+  }
+
+  window.addEventListener("hashchange", function () {
+    applyRoute();
+  });
+
+  function applyRoute() {
+    var route = parseHash();
+    if (state.view === "detail" && route.view !== "detail") {
+      // leaving a detail page — nothing special, home state was persisted on entry
+    }
+    if (route.view === "detail" && APT_BY_ID[route.aptId]) {
+      state.view = "detail";
+      state.aptId = route.aptId;
+      pushRecent(route.aptId);
+      saveRecents();
+      renderDetail(APT_BY_ID[route.aptId]);
+      window.scrollTo(0, 0);
+    } else if (route.view === "compare") {
+      state.view = "compare";
+      renderCompareView();
+      window.scrollTo(0, 0);
+    } else {
+      state.view = "home";
+      restoreHomeState();
+      renderHome();
+      var saved = sessionGet("hbs_home_state", null);
+      if (saved && typeof saved.scrollY === "number") {
+        requestAnimationFrame(function () { window.scrollTo(0, saved.scrollY); });
+      }
+    }
+    renderCompareBar();
+  }
+
+  /* ---------------- toast ---------------- */
+  var toastTimer = null;
+  function showToast(msg) {
+    var el = document.getElementById("toast");
+    el.innerHTML = '<svg><use href="#i-check"/></svg>' + escapeHtml(msg);
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove("show"); }, 2200);
+  }
+
+  /* ---------------- helpers ---------------- */
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function renderFeatureLine(text) {
+    var g = findGlossaryMatch(text);
+    var infoBtn = g ? ' <button class="info-btn" type="button" data-gloss="' + g.id + '" aria-label="Explain ' + escapeHtml(g.term) + ' to a guest" title="Explain to a guest"><svg width="12" height="12"><use href="#i-info"/></svg>Explain to guest</button>' : "";
+    var explain = g ? '<div class="feat-explain"><span class="feat-explain-label">What this means</span>' + escapeHtml(g.short) + "</div>" : "";
+    return '<li class="feat-item"><div class="feat-main"><span class="feat-text-row"><span class="feat-text">' + escapeHtml(text) + "</span>" + infoBtn + "</span>" + explain + "</div></li>";
+  }
+
+  function featList(items) {
+    if (!items || !items.length) return "";
+    return '<ul class="feat-list">' + items.map(renderFeatureLine).join("") + "</ul>";
+  }
+
+  function aptLabel(apt) {
+    return BUILDING_BY_ID[apt.buildingId].name + " — " + apt.number;
+  }
+
+  /* ============================================================
+     RENDER: HOME
+     ============================================================ */
+  function renderHome() {
+    var main = document.getElementById("main");
+    var filtered = APARTMENTS.filter(function (a) {
+      if (!matchesQuery(a, state.query)) return false;
+      for (var f of state.activeFilters) {
+        var def = FILTERS.filter(function (d) { return d.id === f; })[0];
+        if (def && !def.test(a)) return false;
+      }
+      return true;
+    });
+
+    var html = "";
+
+    // HERO
+    html += '<div class="home-hero">' +
+      '<div class="hero-top">' +
+      '<div class="hero-logo-row"><div class="hero-logo-box"><svg viewBox="0 0 640 641"><use href="#hbs-logo"/></svg></div>' +
+      '<div class="hero-brand-text">Homes <em>by</em> Sujo</div></div>' +
+      '<div class="hero-doc-tag"><div class="hero-doc-tag-pill">CO-HOST GUIDE &middot; 38 APARTMENTS</div>' +
+      '<span class="hero-doc-tagline">Where Comfort Feels Personal</span></div>' +
+      '</div>' +
+      '<div class="hero-gold-line"></div>' +
+      '<div class="hero-mid">' +
+      '<div class="hero-left"><div class="hero-eyebrow">Apartment Directory</div>' +
+      '<div class="hero-title">Find the perfect<br><em>match</em> for your guest.</div>' +
+      '<div class="hero-subtitle">Search by building, apartment number or equipment, or browse below. Every entry links straight to its Airbnb listing.</div></div>' +
+      '<div class="hero-right"><div class="hero-stat-row">' +
+      '<div class="hero-stat"><div class="hero-stat-label">Apartments</div><div class="hero-stat-value">38</div><div class="hero-stat-sub">Across the portfolio</div></div>' +
+      '<div class="hero-stat"><div class="hero-stat-label">Buildings</div><div class="hero-stat-value">8</div><div class="hero-stat-sub">Towers &amp; residences</div></div>' +
+      '<div class="hero-stat"><div class="hero-stat-label">Listings</div><div class="hero-stat-value">Live</div><div class="hero-stat-sub">Direct Airbnb links</div></div>' +
+      '</div></div>' +
+      '</div></div>';
+
+    html += '<div class="page-panel">';
+
+    // Filter bar
+    html += '<div class="filter-bar" role="group" aria-label="Feature filters">';
+    FILTERS.forEach(function (f) {
+      var active = state.activeFilters.has(f.id);
+      html += '<button class="chip' + (active ? " active" : "") + '" data-filter="' + f.id + '" aria-pressed="' + active + '">' +
+        escapeHtml(f.label) + (active ? ' <span class="chip-x">&times;</span>' : "") + "</button>";
+    });
+    if (state.query || state.activeFilters.size) {
+      html += '<button class="reset-btn" id="resetBtn">Reset search &amp; filters</button>';
+    }
+    html += '<span class="result-count">' + filtered.length + " of " + APARTMENTS.length + " apartments</span>";
+    html += "</div>";
+
+    var isFiltering = !!(state.query || state.activeFilters.size);
+
+    // Favourites strip
+    if (!isFiltering && favourites.length) {
+      var favApts = favourites.map(function (id) { return APT_BY_ID[id]; }).filter(Boolean);
+      if (favApts.length) {
+        html += '<div class="section"><div class="section-title"><h2>Favourites</h2></div>';
+        html += '<div class="strip">' + favApts.map(renderMiniCard).join("") + "</div></div>";
+      }
+    }
+
+    // Recently viewed strip
+    if (!isFiltering && recents.length) {
+      var recApts = recents.map(function (id) { return APT_BY_ID[id]; }).filter(Boolean).slice(0, 6);
+      if (recApts.length) {
+        html += '<div class="section"><div class="section-title"><h2>Recently viewed</h2></div>';
+        html += '<div class="strip">' + recApts.map(renderMiniCard).join("") + "</div></div>";
+      }
+    }
+
+    // Results
+    if (!filtered.length) {
+      html += '<div class="no-results"><svg><use href="#i-search"/></svg>' +
+        "<h3>No apartments match that search</h3>" +
+        "<p>Try a different building name, apartment number, or equipment term — or reset your filters.</p>" +
+        '<button class="reset-btn" id="resetBtn2">Reset search &amp; filters</button></div>';
+    } else if (isFiltering) {
+      html += '<div class="section"><div class="grid">' + filtered.map(renderCard).join("") + "</div></div>";
+    } else {
+      BUILDINGS.forEach(function (b) {
+        var apts = filtered.filter(function (a) { return a.buildingId === b.id; });
+        if (!apts.length) return;
+        html += '<div class="building-group"><div class="building-head phase-label"><h2>' + escapeHtml(b.name) + '</h2><span class="count">' + apts.length + (apts.length === 1 ? " apartment" : " apartments") + "</span></div>";
+        html += '<div class="grid">' + apts.map(renderCard).join("") + "</div></div>";
+      });
+    }
+
+    html += "</div>"; // close page-panel
+
+    html += '<div class="closing">' +
+      '<div class="closing-eyebrow">Homes by Sujo</div>' +
+      '<div class="closing-title">Every guest deserves excellence.</div>' +
+      '<div class="closing-body">A daily reference built for co-hosts — accurate apartment details, quick equipment explanations, and a direct line to every Airbnb listing.</div>' +
+      '<div class="closing-brand"><svg viewBox="0 0 640 641"><use href="#hbs-logo"/></svg>' +
+      '<span>Homes <em style="font-style:italic;opacity:.7;">by</em> <span class="accent">Sujo</span></span>&nbsp;&middot;&nbsp;Co-Host Apartment Guide' +
+      "</div></div>";
+
+    main.innerHTML = html;
+    wireHomeEvents();
+  }
+
+  function renderCard(apt) {
+    var b = BUILDING_BY_ID[apt.buildingId];
+    var fav = isFavourite(apt.id);
+    var cmp = isInCompare(apt.id);
+    var badges = [];
+    if (apt._search.raw.indexOf("ps5") !== -1) badges.push("PS5");
+    if (apt._search.raw.indexOf("atmos") !== -1) badges.push("Atmos");
+    if (/\bpool\b/.test(apt._search.raw)) badges.push("Pool");
+    if (/balcony|terrace/.test(apt._search.amenityRaw)) badges.push("Balcony");
+    return '<a class="card" href="#/apt/' + encodeURIComponent(apt.id) + '" data-id="' + apt.id + '">' +
+      '<button class="compare-check' + (cmp ? " active" : "") + '" data-compare="' + apt.id + '" aria-pressed="' + cmp + '" aria-label="Add ' + escapeHtml(aptLabel(apt)) + ' to compare"><svg width="13" height="13"><use href="#i-scale"/></svg>' + (cmp ? "Added" : "Compare") + "</button>" +
+      '<div class="card-top"><div><div class="card-building">' + escapeHtml(b.name) + '</div><div class="card-title">' + escapeHtml(apt.number) + "</div></div>" +
+      '<button class="fav-btn' + (fav ? " active" : "") + '" data-fav="' + apt.id + '" aria-pressed="' + fav + '" aria-label="' + (fav ? "Remove from" : "Add to") + ' favourites"><svg><use href="#' + (fav ? "i-star" : "i-star-o") + '"/></svg></button></div>' +
+      '<div class="card-overview">' + escapeHtml(apt.overview) + "</div>" +
+      (badges.length ? '<div class="card-tags">' + badges.map(function (t) { return '<span class="tag-pill">' + t + "</span>"; }).join("") + "</div>" : "") +
+      "</a>";
+  }
+
+  function renderMiniCard(apt) {
+    var b = BUILDING_BY_ID[apt.buildingId];
+    return '<a class="mini-card" href="#/apt/' + encodeURIComponent(apt.id) + '">' +
+      '<div class="card-building">' + escapeHtml(b.name) + '</div><div class="card-title">' + escapeHtml(apt.number) + "</div></a>";
+  }
+
+  function wireHomeEvents() {
+    var input = document.getElementById("searchInput");
+    input.value = state.query;
+    toggleSearchClear();
+
+    document.querySelectorAll("[data-filter]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-filter");
+        if (state.activeFilters.has(id)) state.activeFilters.delete(id); else state.activeFilters.add(id);
+        persistHomeState();
+        renderHome();
+      });
+    });
+
+    var resetBtns = [document.getElementById("resetBtn"), document.getElementById("resetBtn2")].filter(Boolean);
+    resetBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.query = "";
+        state.activeFilters = new Set();
+        persistHomeState(0);
+        renderHome();
+        document.getElementById("searchInput").focus();
+      });
+    });
+
+    document.querySelectorAll("[data-fav]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var id = btn.getAttribute("data-fav");
+        toggleFavourite(id);
+        renderHome();
+      });
+    });
+
+    document.querySelectorAll("[data-compare]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var id = btn.getAttribute("data-compare");
+        toggleCompare(id);
+        renderHome();
+      });
+    });
+
+    document.querySelectorAll(".card, .mini-card").forEach(function (card) {
+      card.addEventListener("click", function () {
+        persistHomeState();
+      });
+    });
+  }
+
+  /* ============================================================
+     RENDER: APARTMENT DETAIL
+     ============================================================ */
+  function renderDetail(apt) {
+    var main = document.getElementById("main");
+    var b = BUILDING_BY_ID[apt.buildingId];
+    var fav = isFavourite(apt.id);
+    var cmp = isInCompare(apt.id);
+
+    var html = "";
+    html += '<div class="back-row"><button class="back-link" id="backBtn"><svg><use href="#i-arrow-left"/></svg>Back to all apartments</button></div>';
+
+    html += '<div class="detail-hero"><div class="detail-hero-main">' +
+      '<div class="detail-building">' + escapeHtml(b.name) + '</div>' +
+      "<h1>Apartment " + escapeHtml(apt.number) + "</h1>" +
+      '<p class="detail-overview">' + escapeHtml(apt.overview) + "</p>";
+    if (apt.quickFacts && apt.quickFacts.length) {
+      html += '<div class="detail-quickfacts">' + apt.quickFacts.map(function (q) { return '<span class="qf-pill">' + escapeHtml(q) + "</span>"; }).join("") + "</div>";
+    }
+    html += "</div>";
+
+    html += '<div class="detail-actions">' +
+      '<a class="airbnb-btn" href="' + apt.airbnb + '" target="_blank" rel="noopener noreferrer"><svg><use href="#i-airbnb"/></svg>Open Airbnb listing</a>' +
+      '<div class="hero-secondary">' +
+      '<button class="ghost-btn' + (fav ? " on" : "") + '" id="favBtn"><svg><use href="#' + (fav ? "i-star" : "i-star-o") + '"/></svg>' + (fav ? "Favourited" : "Favourite") + "</button>" +
+      '<button class="ghost-btn' + (cmp ? " on" : "") + '" id="cmpBtn"><svg><use href="#i-scale"/></svg>' + (cmp ? "In compare" : "Compare") + "</button>" +
+      '<button class="ghost-btn" id="copyBtn"><svg><use href="#i-copy"/></svg>Copy guest summary</button>' +
+      "</div></div></div>";
+
+    html += '<div class="detail-page-panel"><div class="detail-grid">';
+
+    // Living room & entertainment (TVs + sound/gaming/entertainment combined — it's all the same room's setup)
+    html += '<div class="panel wide"><h3><span class="icon-box"><svg><use href="#i-tv"/></svg></span>Living room &amp; entertainment</h3><div class="tv-pair">' +
+      '<div class="tv-slot' + (apt.tv.livingRoom ? "" : " empty") + '"><div class="tv-label">Living room TV</div><div class="tv-value">' + escapeHtml(apt.tv.livingRoom || "Not itemised in the source guide") + "</div></div>" +
+      '<div class="tv-slot' + (apt.tv.bedroom ? "" : " empty") + '"><div class="tv-label">Bedroom TV</div><div class="tv-value">' + escapeHtml(apt.tv.bedroom || "Not itemised in the source guide") + "</div></div>" +
+      "</div>" +
+      (apt.entertainment && apt.entertainment.length ? '<div style="margin-top:14px;">' + featList(apt.entertainment) + "</div>" : "") +
+      (apt.checkIn ? '<div class="notice-box"><svg><use href="#i-check"/></svg><span><strong>Check-in:</strong> ' + escapeHtml(apt.checkIn) + "</span></div>" : "") +
+      "</div>";
+
+    // Kitchen & coffee
+    html += '<div class="panel"><h3><span class="icon-box"><svg><use href="#i-coffee"/></svg></span>Kitchen &amp; coffee</h3>' +
+      (apt.kitchenCoffee && apt.kitchenCoffee.length ? featList(apt.kitchenCoffee) : '<p class="empty-hint">Not itemised in the source guide.</p>') +
+      "</div>";
+
+    // Bedroom / bathroom / laundry
+    html += '<div class="panel"><h3><span class="icon-box"><svg><use href="#i-bed"/></svg></span>Bedroom, bathroom &amp; laundry</h3>' +
+      (apt.bedroomBathroomLaundry && apt.bedroomBathroomLaundry.length ? featList(apt.bedroomBathroomLaundry) : '<p class="empty-hint">Not itemised in the source guide.</p>') +
+      "</div>";
+
+    // Lighting & comfort
+    html += '<div class="panel"><h3><span class="icon-box"><svg><use href="#i-bulb"/></svg></span>Lighting &amp; comfort</h3>' +
+      (apt.lightingComfort && apt.lightingComfort.length ? featList(apt.lightingComfort) : '<p class="empty-hint">Not itemised in the source guide.</p>') +
+      "</div>";
+
+    // Building facilities
+    html += '<div class="panel"><h3><span class="icon-box"><svg><use href="#i-building"/></svg></span>Building facilities</h3>' +
+      (apt.buildingFacilities && apt.buildingFacilities.length ? '<div class="chips-inline">' + apt.buildingFacilities.map(function (t) { return '<span class="tag-pill">' + escapeHtml(t) + "</span>"; }).join("") + "</div>" : '<p class="empty-hint">Not itemised in the source guide.</p>') +
+      "</div>";
+
+    // Services & exceptions (wide)
+    var hasServices = (apt.servicesIncluded && apt.servicesIncluded.length) || (apt.serviceExceptions && apt.serviceExceptions.length) || (apt.guestNotes && apt.guestNotes.length);
+    if (hasServices) {
+      html += '<div class="panel wide"><h3><span class="icon-box"><svg><use href="#i-info"/></svg></span>Included services &amp; things to know</h3>';
+      if (apt.servicesIncluded && apt.servicesIncluded.length) {
+        html += featList(apt.servicesIncluded);
+      }
+      if (apt.serviceExceptions && apt.serviceExceptions.length) {
+        apt.serviceExceptions.forEach(function (ex) {
+          html += '<div class="notice-box exception"><svg><use href="#i-alert"/></svg><span>' + escapeHtml(ex) + "</span></div>";
+        });
+      }
+      if (apt.guestNotes && apt.guestNotes.length) {
+        html += '<div style="margin-top:12px;">' + featList(apt.guestNotes) + "</div>";
+      }
+      html += "</div>";
+    }
+
+    // Gaps — honestly flagged, visually distinct
+    if (apt.gaps && apt.gaps.length) {
+      html += '<div class="panel wide"><h3><span class="icon-box"><svg><use href="#i-clock"/></svg></span>Not yet confirmed</h3>';
+      apt.gaps.forEach(function (g) {
+        html += '<div class="notice-box warn"><svg><use href="#i-alert"/></svg><span>' + escapeHtml(g) + "</span></div>";
+      });
+      html += "</div>";
+    }
+
+    html += "</div></div>"; // detail-grid + detail-page-panel
+
+    main.innerHTML = html;
+    wireDetailEvents(apt);
+  }
+
+  function wireDetailEvents(apt) {
+    document.getElementById("backBtn").addEventListener("click", function () {
+      navigate("#/");
+    });
+    document.getElementById("favBtn").addEventListener("click", function () {
+      toggleFavourite(apt.id);
+      renderDetail(apt);
+    });
+    document.getElementById("cmpBtn").addEventListener("click", function () {
+      toggleCompare(apt.id);
+      renderDetail(apt);
+    });
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      copyGuestSummary(apt);
+    });
+    document.querySelectorAll("[data-gloss]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        openGlossaryPopover(btn.getAttribute("data-gloss"), btn);
+      });
+    });
+  }
+
+  // Title-Case a line the same way the page's own CSS does (text-transform:
+  // capitalize): uppercase just the first letter of each word, leave the
+  // rest of the word untouched, so brand names/initialisms are unaffected.
+  function titleCaseLine(s) {
+    return s.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  function copyGuestSummary(apt) {
+    var b = BUILDING_BY_ID[apt.buildingId];
+    var lines = [];
+    lines.push("Homes by Sujo — " + b.name + " " + apt.number);
+    lines.push(apt.overview);
+    lines.push("");
+    if (apt.tv.livingRoom || apt.tv.bedroom) {
+      lines.push("TVs:");
+      if (apt.tv.livingRoom) lines.push("- Living room: " + apt.tv.livingRoom);
+      if (apt.tv.bedroom) lines.push("- Bedroom: " + apt.tv.bedroom);
+      lines.push("");
+    }
+    if (apt.entertainment && apt.entertainment.length) {
+      lines.push("Entertainment:");
+      apt.entertainment.forEach(function (i) { lines.push("- " + i); });
+      lines.push("");
+    }
+    if (apt.kitchenCoffee && apt.kitchenCoffee.length) {
+      lines.push("Kitchen & coffee:");
+      apt.kitchenCoffee.forEach(function (i) { lines.push("- " + i); });
+      lines.push("");
+    }
+    if (apt.buildingFacilities && apt.buildingFacilities.length) {
+      lines.push("Building facilities: " + apt.buildingFacilities.join(", "));
+      lines.push("");
+    }
+    if (apt.serviceExceptions && apt.serviceExceptions.length) {
+      lines.push("Please note: " + apt.serviceExceptions.join(" "));
+      lines.push("");
+    }
+    // Title-Case every line except the one carrying the Airbnb URL — a URL's
+    // path is case-sensitive, so it must be copied exactly as stored.
+    var text = lines.map(function (line) {
+      return line ? titleCaseLine(line) : line;
+    }).concat([titleCaseLine("Airbnb listing: ") + apt.airbnb]).join("\n");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        showToast("Guest summary copied");
+      }).catch(function () { fallbackCopy(text); });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      showToast("Guest summary copied");
+    } catch (e) {
+      showToast("Copy failed — please select the text manually");
+    }
+  }
+
+  /* ============================================================
+     GLOSSARY POPOVER + MODAL
+     ============================================================ */
+  function openGlossaryPopover(id, anchorEl) {
+    var g = GLOSSARY.filter(function (x) { return x.id === id; })[0];
+    if (!g) return;
+    closePopover();
+    var rect = anchorEl.getBoundingClientRect();
+    var slot = document.getElementById("popoverSlot");
+    var backdrop = document.createElement("div");
+    backdrop.className = "popover-backdrop";
+    backdrop.addEventListener("click", closePopover);
+
+    var pop = document.createElement("div");
+    pop.className = "popover";
+    pop.setAttribute("role", "dialog");
+    pop.setAttribute("aria-label", g.term);
+    var top = Math.min(rect.bottom + 8, window.innerHeight - 220);
+    var left = Math.min(rect.left, window.innerWidth - 360);
+    pop.style.top = Math.max(8, top) + "px";
+    pop.style.left = Math.max(8, left) + "px";
+
+    var body = '<button class="close-x" aria-label="Close">&times;</button>' +
+      '<div class="popover-head"><span class="popover-icon">i</span><div><div class="kind">' + escapeHtml(g.kind) + '</div><h4>' + escapeHtml(g.term) + "</h4></div></div>" +
+      '<div class="popover-msg">' + escapeHtml(g.guestLine || g.short);
+    if (g.example) body += '<span class="ex">Example: ' + escapeHtml(g.example) + "</span>";
+    if (g.caveat) body += '<span class="caveat">' + escapeHtml(g.caveat) + "</span>";
+    if (g.source) body += '<span class="caveat"><a href="' + g.source + '" target="_blank" rel="noopener noreferrer">Source ↗</a></span>';
+    body += "</div>";
+    pop.innerHTML = body;
+
+    slot.appendChild(backdrop);
+    slot.appendChild(pop);
+    pop.querySelector(".close-x").addEventListener("click", closePopover);
+    document.addEventListener("keydown", escCloseOnce);
+    pop.querySelector(".close-x").focus();
+  }
+  function escCloseOnce(e) { if (e.key === "Escape") closePopover(); }
+  function closePopover() {
+    document.getElementById("popoverSlot").innerHTML = "";
+    document.removeEventListener("keydown", escCloseOnce);
+  }
+
+  function openGlossaryModal() {
+    var slot = document.getElementById("modalSlot");
+    function draw(filterText) {
+      var q = (filterText || "").toLowerCase();
+      var list = GLOSSARY.filter(function (g) {
+        return !q || g.term.toLowerCase().indexOf(q) !== -1 || g.short.toLowerCase().indexOf(q) !== -1 || g.kind.toLowerCase().indexOf(q) !== -1;
+      });
+      var body = '<div class="modal-backdrop" id="glossBackdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="glossTitle">' +
+        '<div class="modal-head"><h2 id="glossTitle">Equipment glossary</h2><button class="modal-close" id="glossClose" aria-label="Close">&times;</button></div>' +
+        '<p class="lead">Quick, guest-friendly explanations for the equipment mentioned across apartments.</p>' +
+        '<div class="glossary-search"><svg><use href="#i-search"/></svg><input id="glossSearchInput" placeholder="Search the glossary…" value="' + escapeHtml(filterText || "") + '"></div>' +
+        '<div class="glossary-list">' +
+        (list.length ? list.map(function (g) {
+          return '<div class="gloss-entry"><div class="gloss-head"><div class="kind">' + escapeHtml(g.kind) + '</div><h4>' + escapeHtml(g.term) + "</h4></div>" +
+            '<div class="gloss-body">' + escapeHtml(g.guestLine || g.short) +
+            (g.example ? " Example: " + escapeHtml(g.example) : "") + "</div></div>";
+        }).join("") : '<p class="empty-hint">No glossary terms match that search.</p>') +
+        "</div></div></div>";
+      slot.innerHTML = body;
+      document.getElementById("glossClose").addEventListener("click", closeModal);
+      document.getElementById("glossBackdrop").addEventListener("click", function (e) { if (e.target.id === "glossBackdrop") closeModal(); });
+      var input = document.getElementById("glossSearchInput");
+      input.addEventListener("input", function () { draw(input.value); input.focus(); input.setSelectionRange(input.value.length, input.value.length); });
+      document.addEventListener("keydown", escCloseModalOnce);
+    }
+    draw("");
+  }
+  function escCloseModalOnce(e) { if (e.key === "Escape") closeModal(); }
+  function closeModal() {
+    document.getElementById("modalSlot").innerHTML = "";
+    document.removeEventListener("keydown", escCloseModalOnce);
+  }
+
+  /* ============================================================
+     COMPARE BAR + VIEW
+     ============================================================ */
+  function renderCompareBar() {
+    var slot = document.getElementById("compareBarSlot");
+    var badge = document.getElementById("compareCount");
+    badge.textContent = compareList.length;
+    badge.hidden = compareList.length === 0;
+
+    if (!compareList.length || state.view === "compare") { slot.innerHTML = ""; return; }
+    var apts = compareList.map(function (id) { return APT_BY_ID[id]; }).filter(Boolean);
+    var html = '<div class="compare-bar"><div class="compare-bar-inner">' +
+      '<div class="compare-slots">' + apts.map(function (a) {
+        return '<span class="compare-slot">' + escapeHtml(aptLabel(a)) + ' <button data-remove="' + a.id + '" aria-label="Remove ' + escapeHtml(aptLabel(a)) + ' from compare">&times;</button></span>';
+      }).join("") + "</div>" +
+      '<button class="compare-cancel" id="clearCompare">Clear</button>' +
+      '<button class="compare-cta" id="goCompare" ' + (apts.length < 2 ? "disabled" : "") + ">Compare " + apts.length + " apartment" + (apts.length === 1 ? "" : "s") + "</button>" +
+      "</div></div>";
+    slot.innerHTML = html;
+    document.querySelectorAll("[data-remove]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        toggleCompare(btn.getAttribute("data-remove"));
+        if (state.view === "home") renderHome();
+        if (state.view === "detail") renderDetail(APT_BY_ID[state.aptId]);
+      });
+    });
+    document.getElementById("clearCompare").addEventListener("click", function () {
+      compareList = []; saveCompare(); renderCompareBar();
+      if (state.view === "home") renderHome();
+      if (state.view === "detail") renderDetail(APT_BY_ID[state.aptId]);
+    });
+    document.getElementById("goCompare").addEventListener("click", function () {
+      if (apts.length >= 2) navigate("#/compare");
+    });
+  }
+
+  var COMPARE_ROWS = [
+    { label: "Building", get: function (a) { return BUILDING_BY_ID[a.buildingId].name; } },
+    { label: "Overview", get: function (a) { return a.overview; } },
+    { label: "Living-room TV", get: function (a) { return a.tv.livingRoom || "—"; } },
+    { label: "Bedroom TV", get: function (a) { return a.tv.bedroom || "—"; } },
+    { label: "Entertainment", get: function (a) { return (a.entertainment || []); }, list: true },
+    { label: "Kitchen & coffee", get: function (a) { return (a.kitchenCoffee || []); }, list: true },
+    { label: "Lighting & comfort", get: function (a) { return (a.lightingComfort || []); }, list: true },
+    { label: "Building facilities", get: function (a) { return (a.buildingFacilities || []); }, list: true },
+    { label: "Included services", get: function (a) { return (a.servicesIncluded || []); }, list: true },
+    { label: "Exceptions", get: function (a) { return (a.serviceExceptions || []); }, list: true },
+    { label: "Check-in", get: function (a) { return a.checkIn || "—"; } },
+    { label: "Airbnb listing", get: function (a) { return a.airbnb; }, link: true }
+  ];
+
+  function renderCompareView() {
+    var main = document.getElementById("main");
+    var apts = compareList.map(function (id) { return APT_BY_ID[id]; }).filter(Boolean);
+    var html = '<div class="back-row"><button class="back-link" id="backBtn"><svg><use href="#i-arrow-left"/></svg>Back to all apartments</button></div>';
+    html += '<div class="home-head"><h1>Compare apartments</h1><p>Meaningful differences are highlighted.</p></div>';
+
+    if (apts.length < 2) {
+      html += '<div class="no-results"><svg><use href="#i-scale"/></svg><h3>Add at least two apartments</h3><p>Use the compare button on an apartment card or page, then come back here.</p></div>';
+      main.innerHTML = html;
+      document.getElementById("backBtn").addEventListener("click", function () { navigate("#/"); });
+      return;
+    }
+
+    html += '<div class="compare-table-wrap"><table class="compare-table"><thead><tr><th>&nbsp;</th>' +
+      apts.map(function (a) { return "<th>" + escapeHtml(aptLabel(a)) + "</th>"; }).join("") + "</tr></thead><tbody>";
+
+    COMPARE_ROWS.forEach(function (row) {
+      var values = apts.map(function (a) { return row.get(a); });
+      var serialized = values.map(function (v) { return row.list ? v.join("|") : v; });
+      var differs = new Set(serialized).size > 1;
+      html += "<tr" + (differs ? ' class="diff"' : "") + '><td class="row-label">' + escapeHtml(row.label) + "</td>";
+      values.forEach(function (v) {
+        if (row.link) {
+          html += '<td><a href="' + v + '" target="_blank" rel="noopener noreferrer">Open listing ↗</a></td>';
+        } else if (row.list) {
+          html += "<td>" + (v.length ? "<ul>" + v.map(function (i) { return "<li>" + escapeHtml(i) + "</li>"; }).join("") + "</ul>" : '<span class="empty-hint">—</span>') + "</td>";
+        } else {
+          html += "<td>" + escapeHtml(v) + "</td>";
+        }
+      });
+      html += "</tr>";
+    });
+
+    html += "</tbody></table></div>";
+    html += '<div style="margin-top:16px;"><button class="reset-btn" id="clearCompareView">Clear comparison</button></div>';
+
+    main.innerHTML = html;
+    document.getElementById("backBtn").addEventListener("click", function () { navigate("#/"); });
+    document.getElementById("clearCompareView").addEventListener("click", function () {
+      compareList = []; saveCompare(); navigate("#/");
+    });
+  }
+
+  /* ============================================================
+     GLOBAL SEARCH WIRING
+     ============================================================ */
+  function toggleSearchClear() {
+    var btn = document.getElementById("searchClearBtn");
+    if (state.query) btn.classList.remove("visually-hidden"); else btn.classList.add("visually-hidden");
+  }
+
+  var searchDebounce = null;
+  document.addEventListener("DOMContentLoaded", init);
+
+  function init() {
+    var input = document.getElementById("searchInput");
+    input.addEventListener("input", function () {
+      state.query = input.value;
+      toggleSearchClear();
+      if (state.view !== "home") { navigate("#/"); return; }
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(function () {
+        persistHomeState(0);
+        renderHome();
+        document.getElementById("searchInput").focus();
+        document.getElementById("searchInput").setSelectionRange(input.value.length, input.value.length);
+      }, 80);
+    });
+    document.getElementById("searchClearBtn").addEventListener("click", function () {
+      state.query = "";
+      input.value = "";
+      toggleSearchClear();
+      persistHomeState(0);
+      if (state.view === "home") renderHome();
+      input.focus();
+    });
+    document.getElementById("brandHome").addEventListener("click", function () { navigate("#/"); });
+    document.getElementById("glossaryBtn").addEventListener("click", openGlossaryModal);
+    document.getElementById("compareBtn").addEventListener("click", function () {
+      if (compareList.length >= 2) navigate("#/compare");
+      else showToast("Add at least two apartments to compare");
+    });
+
+    restoreHomeState();
+    applyRoute();
+  }
+})();
+
+</script>
+</body>
+</html>
